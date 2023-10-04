@@ -4,6 +4,13 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Barang Masuk</h1>
     <p class="mb-4">Berisi Laporan Barang Masuk</p>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+            class="fas fa-plus fa-sm text-white-50"></i> Buat Laporan</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
+            Generate Report
+        </button>
+    </div>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
