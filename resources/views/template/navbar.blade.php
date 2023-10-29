@@ -50,7 +50,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Barang
+                Menu
             </div>
 
             <!-- Nav Item -  -->
