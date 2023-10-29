@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('judul')</title>
+    <title>{{ $title }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ url('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -32,14 +32,14 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
-                <div class="sidebar-brand-text mx-3">Stock Opname</div>
+                <div class="sidebar-brand-text mx-3">Inventaris</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {{ ($title === 'Dashboard')? 'active':'' }}">
                 <a class="nav-link" href="{{ url('/') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -54,29 +54,22 @@
             </div>
 
             <!-- Nav Item -  -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/pricelist') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Pricelist</span></a>
-            </li>
-
-            <!-- Nav Item -  -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/stock') }}">
+            <li class="nav-item {{ ($title === 'Stock')? 'active':'' }}">
+                <a class="nav-link " href="{{ url('/stock') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Stock</span></a>
             </li>
 
             <!-- Nav Item -  -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/stuffin') }}">
+            <li class="nav-item {{ ($title === 'Barang Masuk')? 'active':'' }}">
+                <a class="nav-link " href="{{ url('/stuffinf/stuffin') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Barang Masuk</span></a>
             </li>
 
             <!-- Nav Item -  -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/stuffout') }}">
+            <li class="nav-item {{ ($title === 'Barang Keluar')? 'active':'' }}">
+                <a class="nav-link " href="{{ url('/stuffoutf/stuffout') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Barang Keluar</span></a>
             </li>

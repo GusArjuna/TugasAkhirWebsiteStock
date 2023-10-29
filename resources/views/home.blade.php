@@ -1,290 +1,56 @@
 @extends('template.navbar')
-@section('judul', 'Dashboard')
 @section('bagan')
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Laporan Teratas</h1>
     <p class="mb-4">Berisi beberapa laporan yang akan dimuat</p>
-
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
+            Generate Report
+        </button>
+    </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Stock Opname</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Rak Inventaris</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nama Laporan</th>
-                            <th>Jumlah Laporan</th>
-                            <th>Jenis Laporan</th>
-                            <th>Tingkat Urgensi</th>
-                            <th>Tempat Penyimpanan</th>
-                            <th>Aksi</th>
+                            <th>No</th>
+                            <th>Kode Katalog</th>
+                            <th>Nama Material</th>
+                            <th>Lokasi Gudang</th>
+                            <th>Stok</th>
+                            <th>Satuan</th>
+                            <th>Peruntukan</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Nama Laporan</th>
-                            <th>Jumlah Laporan</th>
-                            <th>Jenis Laporan</th>
-                            <th>Tingkat Urgensi</th>
-                            <th>Tempat Penyimpanan</th>
-                            <th>Aksi</th>
+                            <th>No</th>
+                            <th>Kode Katalog</th>
+                            <th>Nama Material</th>
+                            <th>Lokasi Gudang</th>
+                            <th>Stok</th>
+                            <th>Satuan</th>
+                            <th>Peruntukan</th>
+                            <th>Keterangan</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
                             <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Proposal Keuangan</td>
-                            <td>5</td>
-                            <td>Proposal</td>
-                            <td>1</td>
-                            <td>Lemari a25</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
-                                <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="#" method="POST" class="d-inline">
-                                    @method('delete')
-                                    @csrf
-                                    <button class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
+                            <td>Pen12</td>
+                            <td>Test Pen</td>
+                            <td>Rak A25</td>
+                            <td>1504</td>
+                            <td>Buah</td>
+                            <td>Spare</td>
+                            <td>UPT Surabaya Barat</td>
+                            
                         </tr>
                     </tbody>
                 </table>
