@@ -4,7 +4,7 @@
     <h1 class="h3 mb-2 text-gray-800">Barang Keluar</h1>
     <p class="mb-4">Berisi Laporan tentang Barang Keluar</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+        <a href="{{ url('/stuffout/editdata') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus fa-sm text-white-50"></i> Buat Laporan</a>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
             Generate Report
@@ -61,7 +61,7 @@
                             <td>Spare</td>
                             <td>UPT Surabaya Barat</td>
                             <td>4 Januari 2023</td>
-                            <td><a href="#" class="btn btn-warning btn-circle">
+                            <td><a href="{{ url('/stuffout/editdata') }}" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="#" method="POST" class="d-inline">

@@ -54,22 +54,29 @@
             </div>
 
             <!-- Nav Item -  -->
+            <li class="nav-item {{ ($title === 'Kode Material')? 'active':'' }}">
+                <a class="nav-link " href="{{ url('/code') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Kode Material</span></a>
+            </li>
+
+            <!-- Nav Item -  -->
             <li class="nav-item {{ ($title === 'Stock')? 'active':'' }}">
                 <a class="nav-link " href="{{ url('/stock') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Stock</span></a>
+                    <span>Stok</span></a>
             </li>
 
             <!-- Nav Item -  -->
             <li class="nav-item {{ ($title === 'Barang Masuk')? 'active':'' }}">
-                <a class="nav-link " href="{{ url('/stuffinf/stuffin') }}">
+                <a class="nav-link " href="{{ url('/stuffin') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Barang Masuk</span></a>
             </li>
 
             <!-- Nav Item -  -->
             <li class="nav-item {{ ($title === 'Barang Keluar')? 'active':'' }}">
-                <a class="nav-link " href="{{ url('/stuffoutf/stuffout') }}">
+                <a class="nav-link " href="{{ url('/stuffout') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Barang Keluar</span></a>
             </li>
