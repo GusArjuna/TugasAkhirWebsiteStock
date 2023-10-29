@@ -57,7 +57,7 @@
                             <td>Rak A25</td>
                             <td>1504</td>
                             <td>Buah</td>
-                            <td>2424</td>
+                            <td>Bagus</td>
                             <td>Spare</td>
                             <td>UPT Surabaya Barat</td>
                             <td>4 Januari 2023</td>

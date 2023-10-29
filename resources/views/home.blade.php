@@ -1,7 +1,7 @@
 @extends('template.navbar')
 @section('bagan')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Laporan Teratas</h1>
+    <h1 class="h3 mb-2 text-gray-800">Inventaris Gudang PLN</h1>
     <p class="mb-4">Berisi beberapa laporan yang akan dimuat</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">

@@ -5,7 +5,7 @@
     <p class="mb-4">Berisi Kode Material Yang Ada Pada Inventaris</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="{{ url('/code/datain') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-plus fa-sm text-white-50"></i> Buat Laporan</a>
+            class="fas fa-plus fa-sm text-white-50"></i> Tambahkan Material</a>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
             Generate Report
         </button>
@@ -15,7 +15,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Price List</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Kode Matrial</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
