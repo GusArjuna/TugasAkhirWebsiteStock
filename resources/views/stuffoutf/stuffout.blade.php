@@ -4,7 +4,7 @@
     <h1 class="h3 mb-2 text-gray-800">Barang Keluar</h1>
     <p class="mb-4">Berisi Laporan tentang Barang Keluar</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="{{ url('/stuffout/editdata') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
+        <a href="{{ url('/stuffout/datain') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus fa-sm text-white-50"></i> Buat Laporan</a>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
             Generate Report
@@ -24,11 +24,11 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Peruntukan</th>
+                            <th>Keperluan</th>
                             <th>Keterangan</th>
                             <th>Tanggal Keluar</th>
                             <th>Aksi</th>
@@ -39,11 +39,11 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Peruntukan</th>
+                            <th>Keperluan</th>
                             <th>Keterangan</th>
                             <th>Tanggal Keluar</th>
                             <th>Aksi</th>
@@ -54,14 +54,14 @@
                             <td>1</td>
                             <td>Pen12</td>
                             <td>Test Pen</td>
-                            <td>Rak A25</td>
-                            <td>1504</td>
+                            <td>3</td>
                             <td>Buah</td>
                             <td>Bagus</td>
                             <td>Spare</td>
+                            <td>Peminjaman</td>
                             <td>UPT Surabaya Barat</td>
                             <td>4 Januari 2023</td>
-                            <td><a href="{{ url('/stuffout/editdata') }}" class="btn btn-warning btn-circle">
+                            <td><a href="{{ url('/stuffout/1/editdata') }}" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="#" method="POST" class="d-inline">

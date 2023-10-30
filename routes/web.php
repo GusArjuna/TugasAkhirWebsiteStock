@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BarangKeluarController;
+use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\KodeMaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,56 +25,32 @@ Route::get('/stock', function () {
     return view('stock',["title" => "Stock"]);
 });
 
-Route::get('/code', function () {
-    return view('codestufff/codestuff',["title" => "Kode Material"]);
+Route::controller(KodeMaterialController::class)->group(function () {
+    Route::get('/code', 'index');
+    Route::get('/code/datain', 'create');
+    Route::post('/code/formin', 'store');
+    Route::get('/code/{kode}/editdata', 'edit');
+    Route::post('/code/print', 'pdf');
+    Route::delete('/code/{kode}', 'destroy');
+    Route::patch('/code/{kode}', 'update');
 });
 
-Route::get('/code/datain', function () {
-    return view('codestufff/datain',["title" => "Data Kode Material"]);
+Route::controller(BarangMasukController::class)->group(function () {
+    Route::get('/stuffin', 'index');
+    Route::get('/stuffin/datain', 'create');
+    Route::post('/stuffin/formin', 'store');
+    Route::get('/stuffin/{instuff}/editdata', 'edit');
+    Route::post('/stuffin/print', 'pdf');
+    Route::delete('/stuffin/{instuff}', 'destroy');
+    Route::patch('/stuffin/{instuff}', 'update');
 });
 
-Route::get('/code/editdata', function () {
-    return view('codestufff/dataedit',["title" => "Edit Data Kode Material"]);
+Route::controller(BarangKeluarController::class)->group(function () {
+    Route::get('/stuffout', 'index');
+    Route::get('/stuffout/datain', 'create');
+    Route::post('/stuffout/formin', 'store');
+    Route::get('/stuffout/{outstuff}/editdata', 'edit');
+    Route::post('/stuffout/print', 'pdf');
+    Route::delete('/stuffout/{outstuff}', 'destroy');
+    Route::patch('/stuffout/{outstuff}', 'update');
 });
-
-Route::get('/stuffin', function () {
-    return view('stuffinf/stuffin',["title" => "Barang Masuk"]);
-});
-
-Route::get('/stuffin/datain', function () {
-    return view('stuffinf/datain',["title" => "Data Barang Masuk"]);
-});
-
-Route::get('/stuffin/editdata', function () {
-    return view('stuffinf/dataedit',["title" => "Edit Data Barang Masuk"]);
-});
-
-Route::get('/stuffout', function () {
-    return view('stuffoutf/stuffout',["title" => "Barang Keluar"]);
-});
-
-Route::get('/stuffout/datain', function () {
-    return view('stuffout/datain',["title" => "Data Barang Keluar"]);
-});
-
-Route::get('/stuffout/editdata', function () {
-    return view('stuffoutf/dataedit',["title" => "Edit Data Barang Keluar"]);
-});
-// Route::controller(InstuffController::class)->group(function () {
-//     Route::get('/stuffin', 'index')->middleware('auth');
-//     Route::get('/stuffin/formin', 'create')->middleware('auth');
-//     Route::post('/stuffin/formin', 'store')->middleware('auth');
-//     Route::get('/stuffin/{instuff}/edit', 'edit')->middleware('auth');
-//     Route::post('/stuffin/print', 'pdf')->middleware('auth');
-//     Route::delete('/stuffin/{instuff}', 'destroy')->middleware('auth');
-//     Route::patch('/stuffin/{instuff}', 'update')->middleware('auth');
-// });
-// Route::controller(OutstuffController::class)->group(function () {
-//     Route::get('/stuffout', 'index')->middleware('auth');
-//     Route::get('/stuffout/formout', 'create')->middleware('auth');
-//     Route::post('/stuffout/formout', 'store')->middleware('auth');
-//     Route::get('/stuffout/{outstuff}/edit', 'edit')->middleware('auth');
-//     Route::post('/stuffout/print', 'pdf')->middleware('auth');
-//     Route::delete('/stuffout/{outstuff}', 'destroy')->middleware('auth');
-//     Route::patch('/stuffout/{outstuff}', 'update')->middleware('auth');
-// });

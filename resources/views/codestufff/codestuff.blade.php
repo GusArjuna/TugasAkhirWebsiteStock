@@ -44,7 +44,7 @@
                             <td>PEN12</td>
                             <td>Test Pen</td>
                             <td>Buah</td>
-                            <td><a href="{{ url('/code/editdata') }}" class="btn btn-warning btn-circle">
+                            <td><a href="{{ url('/code/1/editdata') }}" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="#" method="POST" class="d-inline">

@@ -24,8 +24,7 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Peruntukan</th>
@@ -39,8 +38,7 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
-                            <th>Stok</th>
+                            <th>Jumlah</th>
                             <th>Satuan</th>
                             <th>Kondisi</th>
                             <th>Peruntukan</th>
@@ -54,14 +52,13 @@
                             <td>1</td>
                             <td>Pen12</td>
                             <td>Test Pen</td>
-                            <td>Rak A25</td>
-                            <td>1504</td>
+                            <td>5</td>
                             <td>Buah</td>
                             <td>Bagus</td>
                             <td>Spare</td>
                             <td>UPT Surabaya Barat</td>
                             <td>3 Januari 2023</td>
-                            <td><a href="{{ url('/stuffin/editdata') }}" class="btn btn-warning btn-circle">
+                            <td><a href="{{ url('/stuffin/1/editdata') }}" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="#" method="POST" class="d-inline">

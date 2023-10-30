@@ -37,13 +37,21 @@
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="peruntukan" class="form-label">Peruntukan</label>
-                        <input class="form-control @error('peruntukan') is-invalid @enderror" type="text" placeholder="Bagus / Rusak ..." name="peruntukan" id="peruntukan">
+                        <input class="form-control @error('peruntukan') is-invalid @enderror" type="text" placeholder="Spare..." name="peruntukan" id="peruntukan">
                         @error('peruntukan')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                       </div>
                 </div>
                 <div class="row g-3">
+                    <div class="col-md-3 mb-3">
+                        <label for="keperluan" class="form-label">Keperluan</label>
+                        <select class="form-control @error('kondisi') is-invalid @enderror" aria-label=".form-select-sm example" name="kondisi" id="kondisi">
+                          <option value="">- Pilih Salah Satu -</option>
+                          <option value="">Peminjaman</option>
+                          <option value="">Retur</option>
+                        </select>
+                      </div>
                     <div class="col-md-3 mb-3">
                         <label for="Keterangan" class="form-label">Keterangan</label>
                         <input class="form-control @error('Keterangan') is-invalid @enderror" type="text" placeholder="Ketikkan Keterangan..." name="Keterangan" id="Keterangan">
