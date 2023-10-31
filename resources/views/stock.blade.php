@@ -53,7 +53,7 @@
                             <td>Buah</td>
                             <td>2424</td>
                             <td>Spare</td>
-                            <td>UPT Surabaya Barat</td>
+                            <td>UPT Surabaya</td>
                         </tr>
                     </tbody>
                 </table>

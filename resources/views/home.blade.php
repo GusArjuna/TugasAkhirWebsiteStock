@@ -49,8 +49,7 @@
                             <td>1504</td>
                             <td>Buah</td>
                             <td>Spare</td>
-                            <td>UPT Surabaya Barat</td>
-                            
+                            <td>UPT Surabaya</td>
                         </tr>
                     </tbody>
                 </table>

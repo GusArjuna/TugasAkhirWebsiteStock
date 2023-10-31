@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class kodeMaterial extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'kodeMaterial',
+        'namaMaterial',
+        'satuan',
+    ];
 }

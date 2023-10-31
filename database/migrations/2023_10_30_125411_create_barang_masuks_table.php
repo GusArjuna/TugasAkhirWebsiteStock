@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('barang_masuks', function (Blueprint $table) {
             $table->id();
+            $table->integer('kodeMaterial');
+            $table->integer('jumlah');
+            $table->string('kondisi');
+            $table->string('peruntukan');
+            $table->string('keterangan');
+            $table->date('tanggalMasuk');
             $table->timestamps();
         });
     }

@@ -49,7 +49,7 @@
                         <input class="form-control @error('Keterangan') is-invalid @enderror" type="text" placeholder="Ketikkan Keterangan..." name="Keterangan" id="Keterangan">
                       </div>
                       <div class="col-md-3 mb-3">
-                        <label for="tanggal" class="form-label">Tanggal Keluar</label>
+                        <label for="tanggal" class="form-label">Tanggal Masuk</label>
                         <input class="form-control @error('tanggal') is-invalid @enderror" type="date" name="tanggal" id="tanggal">
                         @error('tanggal')
                             <div class="alert alert-danger">{{ $message }}</div>
