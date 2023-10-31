@@ -53,6 +53,8 @@ class BarangMasukController extends Controller
      */
     public function store(StorebarangMasukRequest $request)
     {
+        $kodematerial=kodeMaterial::where('kodeMaterial', $request->kodeMaterial)->first();
+        $kodematerial->stok = $kodematerial->stok + $request->jumlah;
         $validatedData = $request->validate([
             'kodeMaterial' => 'required',
             'jumlah' => 'required',
@@ -60,7 +62,8 @@ class BarangMasukController extends Controller
             'keterangan' => 'required',
             'tanggalMasuk' => 'required',
         ]);
-
+        kodeMaterial::where('kodeMaterial', $request->kodeMaterial)
+                    ->update(['stok' => $kodematerial->stok]);
         barangMasuk::create($validatedData);
         return redirect('/stuffin')->with('success','Data Ditambahkan');
     }
@@ -91,6 +94,15 @@ class BarangMasukController extends Controller
      */
     public function update(UpdatebarangMasukRequest $request, barangMasuk $barangMasuk)
     {
+        $kodematerial=kodeMaterial::where('kodeMaterial', $request->kodeMaterial)->first();
+        if ($request->jumlah>$barangMasuk->jumlah) {
+            $perubahan = $request->jumlah - $barangMasuk->jumlah;
+        }elseif ($request->jumlah<$barangMasuk->jumlah) {
+            $perubahan = $request->jumlah - $barangMasuk->jumlah;
+        }else{
+            $perubahan = 0;
+        }
+        $kodematerial->stok = $kodematerial->stok + $perubahan;
         $validatedData = $request->validate([
             'kodeMaterial' => 'required',
             'jumlah' => 'required',
@@ -98,7 +110,8 @@ class BarangMasukController extends Controller
             'keterangan' => 'required',
             'tanggalMasuk' => 'required',
         ]);
-
+        kodeMaterial::where('kodeMaterial', $request->kodeMaterial)
+                    ->update(['stok' => $kodematerial->stok]);
         barangMasuk::where('id',$barangMasuk->id)
                     ->update($validatedData);
         return redirect('/stuffin')->with('success','Data Diupdate');
@@ -109,6 +122,10 @@ class BarangMasukController extends Controller
      */
     public function destroy(barangMasuk $barangMasuk)
     {
+        $kodematerial=kodeMaterial::where('kodeMaterial', $barangMasuk->kodeMaterial)->first();
+        $kodematerial->stok = $kodematerial->stok - $barangMasuk->jumlah;
+        kodeMaterial::where('kodeMaterial', $barangMasuk->kodeMaterial)
+                    ->update(['stok' => $kodematerial->stok]);
         barangMasuk::destroy($barangMasuk->id);
         return redirect('/stuffin')->with('success','Data Dihapus');
     }
