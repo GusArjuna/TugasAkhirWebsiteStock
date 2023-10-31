@@ -57,7 +57,6 @@ class BarangMasukController extends Controller
             'kodeMaterial' => 'required',
             'jumlah' => 'required',
             'kondisi' => 'required',
-            'peruntukan' => 'required',
             'keterangan' => 'required',
             'tanggalMasuk' => 'required',
         ]);
@@ -96,7 +95,6 @@ class BarangMasukController extends Controller
             'kodeMaterial' => 'required',
             'jumlah' => 'required',
             'kondisi' => 'required',
-            'peruntukan' => 'required',
             'keterangan' => 'required',
             'tanggalMasuk' => 'required',
         ]);

@@ -13,7 +13,6 @@ class barangKeluar extends Model
         'kodeMaterial',
         'jumlah',
         'kondisi',
-        'peruntukan',
         'keperluan',
         'keterangan',
         'tanggalKeluar'

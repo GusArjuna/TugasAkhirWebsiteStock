@@ -16,7 +16,9 @@ return new class extends Migration
             $table->String('kodeMaterial')->unique();
             $table->String('namaMaterial');
             $table->String('satuan');
+            $table->String('peruntukan');
             $table->String('stok')->nullable();
+            $table->String('frekuensi')->nullable();
             $table->timestamps();
         });
     }

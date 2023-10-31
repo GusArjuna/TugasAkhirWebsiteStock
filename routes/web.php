@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
+use App\Http\Controllers\displayer;
 use App\Http\Controllers\KodeMaterialController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home',["title" => "Dashboard"]);
-});
 
-
-Route::get('/stock', function () {
-    return view('stock',["title" => "Stock"]);
+Route::controller(displayer::class)->group(function () {
+    Route::get('/', 'dashboard');
+    Route::get('/stock', 'stok');
+    Route::get('/print', 'pdfdashboard');
+    Route::get('/stock/print', 'pdfstok');
 });
 
 Route::controller(KodeMaterialController::class)->group(function () {

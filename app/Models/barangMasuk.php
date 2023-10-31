@@ -13,7 +13,6 @@ class barangMasuk extends Model
         'kodeMaterial',
         'jumlah',
         'kondisi',
-        'peruntukan',
         'keterangan',
         'tanggalMasuk'
     ];

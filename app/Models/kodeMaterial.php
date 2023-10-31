@@ -11,8 +11,14 @@ class kodeMaterial extends Model
     protected $fillable=[
         'kodeMaterial',
         'namaMaterial',
+        'peruntukan',
         'stok',
+        'frekuensi',
         'satuan'
+    ];
+    protected $attributes =[
+        'frekuensi' => 0,
+        'stok' => 0,
     ];
     
     public function barangmasuk(){

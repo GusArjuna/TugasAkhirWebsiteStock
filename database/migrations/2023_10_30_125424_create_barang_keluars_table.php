@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('kodeMaterial');
             $table->integer('jumlah');
             $table->string('kondisi');
-            $table->string('peruntukan');
             $table->string('keperluan');
             $table->string('keterangan');
             $table->date('tanggalKeluar');

@@ -36,6 +36,15 @@
                         @enderror
                       </div>
                 </div>
+                <div class="row g-3">
+                      <div class="col-md-3 mb-3">
+                        <label for="peruntukan" class="form-label">Peruntukan</label>
+                        <input class="form-control @error('peruntukan') is-invalid @enderror" type="text" placeholder="Ketikkan kode..." name="peruntukan" id="peruntukan" value="{{ old('peruntukan') }}" onkeyup="this.value = this.value.toUpperCase()" required autofocus>
+                      </div>
+                      @error('peruntukan')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                </div>
                 <button class="btn btn-success btn-icon-split" type="submit">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
