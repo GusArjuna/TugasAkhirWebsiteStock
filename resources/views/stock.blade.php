@@ -4,9 +4,9 @@
     <h1 class="h3 mb-2 text-gray-800">Ketersediaan Barang</h1>
     <p class="mb-4">Berisi Laporan Jumlah Barang pada kantor</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
+        <a type="button" class="btn btn-primary" href="/stock/print">
             Generate Report
-        </button>
+        </a>
     </div>
 
     <!-- DataTales Example -->
@@ -22,12 +22,10 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
                             <th>Stok</th>
                             <th>Satuan</th>
                             <th>Frekuensi Penggunaan</th>
                             <th>Peruntukan</th>
-                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -35,26 +33,24 @@
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
                             <th>Stok</th>
                             <th>Satuan</th>
                             <th>Frekuensi Penggunaan</th>
                             <th>Peruntukan</th>
-                            <th>Keterangan</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($kodematerials as $kodematerial)
                         <tr>
-                            <td>1</td>
-                            <td>Pen12</td>
-                            <td>Test Pen</td>
-                            <td>Rak A25</td>
-                            <td>1504</td>
-                            <td>Buah</td>
-                            <td>2424</td>
-                            <td>Spare</td>
-                            <td>UPT Surabaya</td>
+                            <td> {{ $loop->iteration }} </td>
+                            <td> {{ $kodematerial->kodeMaterial}} </td>
+                            <td> {{ $kodematerial->namaMaterial}} </td>
+                            <td> {{ $kodematerial->stok}} </td>
+                            <td> {{ $kodematerial->satuan}} </td>
+                            <td> {{ $kodematerial->frekuensi}} </td>
+                            <td> {{ $kodematerial->peruntukan}} </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

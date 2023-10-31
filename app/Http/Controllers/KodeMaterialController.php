@@ -45,6 +45,7 @@ class KodeMaterialController extends Controller
             'kodeMaterial' => 'required',
             'namaMaterial' => 'required',
             'satuan' => 'required',
+            'peruntukan' => 'required',
         ]);
 
         kodeMaterial::create($validatedData);
@@ -77,6 +78,7 @@ class KodeMaterialController extends Controller
     {
         $rules = [
             'satuan' => 'required',
+            'peruntukan' => 'required',
         ];
 
         if ($request->kodeMaterial != $kodeMaterial->kodeMaterial) {

@@ -11288,7 +11288,7 @@ body.sidebar-toggled footer.sticky-footer {
    <div class="container mt-3">
             <center>
                 <h6 class="m-0 font-weight-bold text-primary">INVENTARIS PLN</h6>
-                <h6 class="m-0 font-weight-bold text-primary">LAPORAN KODE & NAMA MATERIAL</h6>
+                <h6 class="m-0 font-weight-bold text-primary">LAPORAN STOK MATERIAL</h6>
             </center>
             <hr class="sidebar-divider">
        <div class="card shadow mb-4 border-left-info">
@@ -11299,34 +11299,40 @@ body.sidebar-toggled footer.sticky-footer {
                <div class="table-responsive">
                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
-                          <tr>
-                              <th>No</th>
-                              <th>Kode Katalog</th>
-                              <th>Nama Material</th>
-                              <th>Satuan</th>
-                              <th>Peruntukan</th>
-                          </tr>
-                      </thead>
-                      <tfoot>
-                          <tr>
-                              <th>No</th>
-                              <th>Kode Katalog</th>
-                              <th>Nama Material</th>
-                              <th>Satuan</th>
-                              <th>Peruntukan</th>
-                          </tr>
-                      </tfoot>
-                       <tbody>
-                          @foreach ($data as $kodematerial)
-                          <tr>
-                              <td>{{ $loop->iteration }}</td>
-                              <td>{{ $kodematerial['kodeMaterial'] }}</td>
-                              <td>{{ $kodematerial['namaMaterial'] }}</td>
-                              <td>{{ $kodematerial['satuan'] }}</td>
-                              <td>{{ $kodematerial['peruntukan'] }}</td>
-                          </tr>
-                          @endforeach
-                       </tbody>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Katalog</th>
+                            <th>Nama Material</th>
+                            <th>Stok</th>
+                            <th>Satuan</th>
+                            <th>Frekuensi Penggunaan</th>
+                            <th>Peruntukan</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Katalog</th>
+                            <th>Nama Material</th>
+                            <th>Stok</th>
+                            <th>Satuan</th>
+                            <th>Frekuensi Penggunaan</th>
+                            <th>Peruntukan</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach ($kodematerials as $kodematerial)
+                        <tr>
+                            <td> {{ $loop->iteration }} </td>
+                            <td> {{ $kodematerial['kodeMaterial']}} </td>
+                            <td> {{ $kodematerial['namaMaterial']}} </td>
+                            <td> {{ $kodematerial['stok']}} </td>
+                            <td> {{ $kodematerial['satuan']}} </td>
+                            <td> {{ $kodematerial['frekuensi']}} </td>
+                            <td> {{ $kodematerial['peruntukan']}} </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                    </table>
                </div>
            </div>

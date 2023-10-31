@@ -74,7 +74,11 @@
                                 @endforeach
                             </td>
                             <td>{{ $barangmasuk->kondisi }}</td>
-                            <td>{{ $barangmasuk->peruntukan }}</td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->peruntukan :""
+                                }}
+                                @endforeach</td>
                             <td>{{ $barangmasuk->keterangan }}</td>
                             <td>{{ $barangmasuk->tanggalMasuk }}</td>
                             <td><a href="/stuffin/{{ $barangmasuk->id }}/editdata" class="btn btn-warning btn-circle">

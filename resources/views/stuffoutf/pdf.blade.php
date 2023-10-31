@@ -11350,7 +11350,12 @@ body.sidebar-toggled footer.sticky-footer {
                               @endforeach
                           </td>
                           <td>{{ $barangkeluar['kondisi'] }}</td>
-                          <td>{{ $barangkeluar['peruntukan'] }}</td>
+                          <td>@foreach ($kodematerials as $kodematerial)
+                            {{ 
+                                ($kodematerial['kodeMaterial']==$barangkeluar['kodeMaterial'])? $kodematerial['peruntukan'] :""
+                            }}
+                            @endforeach
+                          </td>
                           <td>{{ $barangkeluar['keperluan'] }}</td>
                           <td>{{ $barangkeluar['keterangan'] }}</td>
                           <td>{{ $barangkeluar['tanggalKeluar'] }}</td>

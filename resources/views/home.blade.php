@@ -4,9 +4,9 @@
     <h1 class="h3 mb-2 text-gray-800">Inventaris Gudang PLN</h1>
     <p class="mb-4">Berisi beberapa laporan yang akan dimuat</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
+        <a type="button" class="btn btn-primary" href="/print">
             Generate Report
-        </button>
+        </a>
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -22,10 +22,8 @@
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
                             <th>Lokasi Gudang</th>
-                            <th>Stok</th>
                             <th>Satuan</th>
                             <th>Peruntukan</th>
-                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -34,23 +32,21 @@
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
                             <th>Lokasi Gudang</th>
-                            <th>Stok</th>
                             <th>Satuan</th>
                             <th>Peruntukan</th>
-                            <th>Keterangan</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($kodematerials as $kodematerial)
                         <tr>
-                            <td>1</td>
-                            <td>Pen12</td>
-                            <td>Test Pen</td>
-                            <td>Rak A25</td>
-                            <td>1504</td>
-                            <td>Buah</td>
-                            <td>Spare</td>
-                            <td>UPT Surabaya</td>
+                            <td> {{ $loop->iteration }} </td>
+                            <td> {{ $kodematerial->kodeMaterial}} </td>
+                            <td> {{ $kodematerial->namaMaterial}} </td>
+                            <td> Rak ... </td>
+                            <td> {{ $kodematerial->satuan}} </td>
+                            <td> {{ $kodematerial->peruntukan}} </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
