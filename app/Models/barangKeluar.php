@@ -16,7 +16,7 @@ class barangKeluar extends Model
         'peruntukan',
         'keperluan',
         'keterangan',
-        'tanggalMasuk'
+        'tanggalKeluar'
     ];
     public function user(): BelongsTo
     {

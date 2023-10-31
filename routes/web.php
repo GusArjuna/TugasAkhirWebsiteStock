@@ -29,28 +29,28 @@ Route::controller(KodeMaterialController::class)->group(function () {
     Route::get('/code', 'index');
     Route::get('/code/datain', 'create');
     Route::post('/code/datain', 'store');
-    Route::get('/code/{kode}/editdata', 'edit');
-    Route::post('/code/print', 'pdf');
-    Route::delete('/code/{kode}', 'destroy');
-    Route::patch('/code/{kode}', 'update');
+    Route::get('/code/{kodeMaterial}/editdata', 'edit');
+    Route::get('/code/print', 'pdf');
+    Route::delete('/code/{kodeMaterial}', 'destroy');
+    Route::patch('/code/{kodeMaterial}', 'update');
 });
 
 Route::controller(BarangMasukController::class)->group(function () {
     Route::get('/stuffin', 'index');
     Route::get('/stuffin/datain', 'create');
     Route::post('/stuffin/datain', 'store');
-    Route::get('/stuffin/{instuff}/editdata', 'edit');
-    Route::post('/stuffin/print', 'pdf');
-    Route::delete('/stuffin/{instuff}', 'destroy');
-    Route::patch('/stuffin/{instuff}', 'update');
+    Route::get('/stuffin/{barangMasuk}/editdata', 'edit');
+    Route::get('/stuffin/print', 'pdf');
+    Route::delete('/stuffin/{barangMasuk}', 'destroy');
+    Route::patch('/stuffin/{barangMasuk}', 'update');
 });
 
 Route::controller(BarangKeluarController::class)->group(function () {
     Route::get('/stuffout', 'index');
     Route::get('/stuffout/datain', 'create');
     Route::post('/stuffout/datain', 'store');
-    Route::get('/stuffout/{outstuff}/editdata', 'edit');
-    Route::post('/stuffout/print', 'pdf');
-    Route::delete('/stuffout/{outstuff}', 'destroy');
-    Route::patch('/stuffout/{outstuff}', 'update');
+    Route::get('/stuffout/{barangKeluar}/editdata', 'edit');
+    Route::get('/stuffout/print', 'pdf');
+    Route::delete('/stuffout/{barangKeluar}', 'destroy');
+    Route::patch('/stuffout/{barangKeluar}', 'update');
 });

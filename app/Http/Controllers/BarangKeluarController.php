@@ -6,9 +6,22 @@ use App\Models\barangKeluar;
 use App\Http\Requests\StorebarangKeluarRequest;
 use App\Http\Requests\UpdatebarangKeluarRequest;
 use App\Models\kodeMaterial;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarangKeluarController extends Controller
 {
+    public function pdf(){
+        
+        $kodematerials = kodeMaterial::all();
+        $kodematerials = $kodematerials->toArray();
+        $barangkeluars = barangKeluar::all();
+        $barangkeluars = $barangkeluars->toArray();
+        $pdf = Pdf::loadView('stuffoutf.pdf', [
+            "kodematerials" => $kodematerials,
+            "barangkeluars" => $barangkeluars
+        ]);
+        return $pdf->download('Laporan_Barang_Masuk.pdf');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +41,11 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        return view('stuffoutf/datain',["title" => "Data Barang Keluar"]);
+        $kodematerials = kodeMaterial::all();
+        return view('stuffoutf/datain',[
+            "title" => "Data Barang Keluar",
+            "kodematerials" => $kodematerials
+        ]);
     }
 
     /**
@@ -36,7 +53,18 @@ class BarangKeluarController extends Controller
      */
     public function store(StorebarangKeluarRequest $request)
     {
-        dd($request);
+        $validatedData = $request->validate([
+            'kodeMaterial' => 'required',
+            'jumlah' => 'required',
+            'kondisi' => 'required',
+            'peruntukan' => 'required',
+            'keperluan' => 'required',
+            'keterangan' => 'required',
+            'tanggalKeluar' => 'required',
+        ]);
+
+        barangKeluar::create($validatedData);
+        return redirect('/stuffout')->with('success','Data Ditambahkan');
     }
 
     /**
@@ -52,7 +80,13 @@ class BarangKeluarController extends Controller
      */
     public function edit(barangKeluar $barangKeluar)
     {
-        return view('stuffoutf/dataedit',["title" => "Edit Data Barang Keluar"]);
+        $kodematerials = kodeMaterial::all();
+        return view('stuffoutf/dataedit',[
+            "title" => "Edit Data Barang Keluar",
+            "barangKeluar" => $barangKeluar,
+            "kodematerials" => $kodematerials
+        ]);
+        
     }
 
     /**
@@ -60,7 +94,19 @@ class BarangKeluarController extends Controller
      */
     public function update(UpdatebarangKeluarRequest $request, barangKeluar $barangKeluar)
     {
-        //
+        $validatedData = $request->validate([
+            'kodeMaterial' => 'required',
+            'jumlah' => 'required',
+            'kondisi' => 'required',
+            'peruntukan' => 'required',
+            'keperluan' => 'required',
+            'keterangan' => 'required',
+            'tanggalKeluar' => 'required',
+        ]);
+
+        barangKeluar::where('id',$barangKeluar->id)
+                    ->update($validatedData);
+        return redirect('/stuffout')->with('success','Data diupdate');
     }
 
     /**
@@ -68,6 +114,7 @@ class BarangKeluarController extends Controller
      */
     public function destroy(barangKeluar $barangKeluar)
     {
-        //
+        barangKeluar::destroy($barangKeluar->id);
+        return redirect('/stuffout')->with('success','Data Dihapus');
     }
 }

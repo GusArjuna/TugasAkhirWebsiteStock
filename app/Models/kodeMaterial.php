@@ -11,6 +11,7 @@ class kodeMaterial extends Model
     protected $fillable=[
         'kodeMaterial',
         'namaMaterial',
+        'stok',
         'satuan'
     ];
     

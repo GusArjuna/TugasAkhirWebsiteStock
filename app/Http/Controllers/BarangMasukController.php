@@ -6,9 +6,22 @@ use App\Models\barangMasuk;
 use App\Http\Requests\StorebarangMasukRequest;
 use App\Http\Requests\UpdatebarangMasukRequest;
 use App\Models\kodeMaterial;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarangMasukController extends Controller
 {
+    public function pdf(){
+        
+        $kodematerials = kodeMaterial::all();
+        $kodematerials = $kodematerials->toArray();
+        $barangmasuks = barangMasuk::all();
+        $barangmasuks = $barangmasuks->toArray();
+        $pdf = Pdf::loadView('stuffinf.pdf', [
+            "kodematerials" => $kodematerials,
+            "barangmasuks" => $barangmasuks
+        ]);
+        return $pdf->download('Laporan_Barang_Masuk.pdf');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +30,7 @@ class BarangMasukController extends Controller
         $kodematerials = kodeMaterial::all();
         $barangmasuks = barangMasuk::all();
         return view('stuffinf/stuffin',[
-            "title" => "Barang Keluar",
+            "title" => "Barang Masuk",
             "barangmasuks" => $barangmasuks,
             "kodematerials" => $kodematerials,
         ]);
@@ -28,7 +41,11 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        return view('stuffinf/datain',["title" => "Data Barang Masuk"]);
+        $kodematerials = kodeMaterial::all();
+        return view('stuffinf/datain',[
+            "title" => "Data Barang Masuk",
+            "kodematerials" => $kodematerials
+        ]);
     }
 
     /**
@@ -36,7 +53,17 @@ class BarangMasukController extends Controller
      */
     public function store(StorebarangMasukRequest $request)
     {
-        dd($request);
+        $validatedData = $request->validate([
+            'kodeMaterial' => 'required',
+            'jumlah' => 'required',
+            'kondisi' => 'required',
+            'peruntukan' => 'required',
+            'keterangan' => 'required',
+            'tanggalMasuk' => 'required',
+        ]);
+
+        barangMasuk::create($validatedData);
+        return redirect('/stuffin')->with('success','Data Ditambahkan');
     }
 
     /**
@@ -52,7 +79,12 @@ class BarangMasukController extends Controller
      */
     public function edit(barangMasuk $barangMasuk)
     {
-        return view('stuffinf/dataedit',["title" => "Edit Data Barang Masuk"]);
+        $kodematerials = kodeMaterial::all();
+        return view('stuffinf/dataedit',[
+            "title" => "Edit Data Barang Masuk",
+            "barangMasuk" => $barangMasuk,
+            "kodematerials" => $kodematerials
+        ]);
     }
 
     /**
@@ -60,7 +92,18 @@ class BarangMasukController extends Controller
      */
     public function update(UpdatebarangMasukRequest $request, barangMasuk $barangMasuk)
     {
-        //
+        $validatedData = $request->validate([
+            'kodeMaterial' => 'required',
+            'jumlah' => 'required',
+            'kondisi' => 'required',
+            'peruntukan' => 'required',
+            'keterangan' => 'required',
+            'tanggalMasuk' => 'required',
+        ]);
+
+        barangMasuk::where('id',$barangMasuk->id)
+                    ->update($validatedData);
+        return redirect('/stuffin')->with('success','Data Diupdate');
     }
 
     /**
@@ -68,6 +111,7 @@ class BarangMasukController extends Controller
      */
     public function destroy(barangMasuk $barangMasuk)
     {
-        //
+        barangMasuk::destroy($barangMasuk->id);
+        return redirect('/stuffin')->with('success','Data Dihapus');
     }
 }

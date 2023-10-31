@@ -11,33 +11,48 @@
             <h6 class="m-0 font-weight-bold text-primary">Formulir Barang Masuk</h6>
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="/stuffin/{{ $barangMasuk->id }}">
                 @csrf
+                @method('patch')
                 <div class="row g-3">
                     <div class="col-md-6 mb-3">
-                        <label for="kode" class="form-label">Nama & Kode Barang</label>
-                        <select class="form-control @error('kode') is-invalid @enderror" aria-label=".form-select-sm example" name="kode" id="kode">
+                        <label for="kodeMaterial" class="form-label">Kode - Nama Barang</label>
+                        <select class="form-control @error('kodeMaterial') is-invalid @enderror" aria-label=".form-select-sm example" name="kodeMaterial" id="kodeMaterial">
                           <option value="">- Pilih Salah Satu -</option>
-                          <option value="">PEN12</option>
+                          @foreach ($kodematerials as $kodematerial)
+                          <option {{ (old('kodeMaterial',$barangMasuk->kodeMaterial)==$kodematerial->kodeMaterial)?"selected":"" }} value="{{ $kodematerial->kodeMaterial }}">{{ $kodematerial->kodeMaterial }} - {{ $kodematerial->namaMaterial }}</option>
+                          @endforeach
                         </select>
+                        @error('kodeMaterial')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                 </div>
                 <div class="row g-3">
                       <div class="col-md-3 mb-3">
                         <label for="jumlah" class="form-label">Jumlah</label>
-                        <input class="form-control @error('jumlah') is-invalid @enderror" type="text" placeholder="Ketikkan jumlah..." name="jumlah" id="jumlah">
+                        <input class="form-control @error('jumlah') is-invalid @enderror" type="text" placeholder="Ketikkan jumlah..." name="jumlah" id="jumlah" value="{{ old('jumlah',$barangMasuk->jumlah) }}" onkeyup="this.value = this.value.toUpperCase()" required>
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="kondisi" class="form-label">Kondisi</label>
-                        <select class="form-control @error('kondisi') is-invalid @enderror" aria-label=".form-select-sm example" name="kondisi" id="kondisi">
+                        <select class="form-control @error('kondisi') is-invalid @enderror" aria-label=".form-select-sm example" name="kondisi" id="kondisi" required>
                             <option value="">- Pilih Salah Satu -</option>
-                            <option value="">Baru</option>
-                            <option value="">Bagus</option>
+                            @if (old('kondisi',$barangMasuk->kondisi)=='BARU')
+                              <option value="BARU" selected>BARU</option>
+                              <option value="BAGUS">BAGUS</option>
+                            @elseif (old('kondisi',$barangMasuk->kondisi)=='BAGUS')
+                              <option value="BARU" >BARU</option>
+                              <option value="BAGUS" selected>BAGUS</option>
+                            @else
+                              <option value="BARU">BARU</option>
+                              <option value="BAGUS">BAGUS</option>
+                            @endif
+
                           </select>
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="peruntukan" class="form-label">Peruntukan</label>
-                        <input class="form-control @error('peruntukan') is-invalid @enderror" type="text" placeholder="Kegunaan" name="peruntukan" id="peruntukan">
+                        <input class="form-control @error('peruntukan') is-invalid @enderror" type="text" placeholder="Kegunaan..." name="peruntukan" id="peruntukan" value="{{ old('peruntukan',$barangMasuk->peruntukan) }}" onkeyup="this.value = this.value.toUpperCase()" required>
                         @error('peruntukan')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -45,13 +60,13 @@
                 </div>
                 <div class="row g-3">
                     <div class="col-md-3 mb-3">
-                        <label for="Keterangan" class="form-label">Keterangan</label>
-                        <input class="form-control @error('Keterangan') is-invalid @enderror" type="text" placeholder="Ketikkan Keterangan..." name="Keterangan" id="Keterangan">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <input class="form-control @error('keterangan') is-invalid @enderror" type="text" placeholder="Ketikkan Keterangan..." name="keterangan" id="Keterangan" value="{{ old('keterangan',$barangMasuk->keterangan) }}" onkeyup="this.value = this.value.toUpperCase()" required>
                       </div>
                       <div class="col-md-3 mb-3">
-                        <label for="tanggal" class="form-label">Tanggal Keluar</label>
-                        <input class="form-control @error('tanggal') is-invalid @enderror" type="date" name="tanggal" id="tanggal">
-                        @error('tanggal')
+                        <label for="tanggalMasuk" class="form-label">Tanggal Masuk</label>
+                        <input class="form-control @error('tanggalMasuk') is-invalid @enderror" type="date" name="tanggalMasuk" id="tanggalMasuk" value="{{ old('tanggalMasuk',$barangMasuk->tanggalMasuk) }}" required>
+                        @error('tanggalMasuk')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                       </div>

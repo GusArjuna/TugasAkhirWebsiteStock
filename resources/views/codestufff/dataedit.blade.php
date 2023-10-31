@@ -11,26 +11,33 @@
             <h6 class="m-0 font-weight-bold text-primary">Edit Formulir Kode Material</h6>
         </div>
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="/code/{{ $kodeMaterial->id }}">
+                @method('patch')
                 @csrf
                 <div class="row g-3">
                       <div class="col-md-3 mb-3">
-                        <label for="kode" class="form-label">Kode</label>
-                        <input class="form-control @error('kode') is-invalid @enderror" type="text" placeholder="Ketikkan kode..." name="kode" id="kode">
+                        <label for="kodeMaterial" class="form-label">Kode</label>
+                        <input class="form-control @error('kodeMaterial') is-invalid @enderror" type="text" placeholder="Ketikkan kode..." name="kodeMaterial" id="kodeMaterial" value="{{ old('kodeMaterial',$kodeMaterial->kodeMaterial) }}" onkeyup="this.value = this.value.toUpperCase()" required autofocus>
                       </div>
+                      @error('kodeMaterial')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       <div class="col-md-3 mb-3">
-                        <label for="nama material" class="form-label">Nama Material</label>
-                        <input class="form-control @error('nama material') is-invalid @enderror" type="text" placeholder="Ketikkan nama material..." name="nama material" id="nama material">
+                        <label for="namaMaterial" class="form-label">Nama Material</label>
+                        <input class="form-control @error('namaMaterial') is-invalid @enderror" type="text" placeholder="Ketikkan nama material..." name="namaMaterial" id="namaMaterial" value="{{ old('namaMaterial',$kodeMaterial->namaMaterial) }}" onkeyup="this.value = this.value.toUpperCase()" required>
                       </div>
+                      @error('namaMaterial')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       <div class="col-md-3 mb-3">
                         <label for="satuan" class="form-label">Satuan</label>
-                        <input class="form-control @error('satuan') is-invalid @enderror" type="text" placeholder="Buah / Biji" name="satuan" id="satuan">
+                        <input class="form-control @error('satuan') is-invalid @enderror" type="text" placeholder="Buah / Biji" name="satuan" id="satuan" value="{{ old('satuan',$kodeMaterial->satuan) }}" onkeyup="this.value = this.value.toUpperCase()" required>
                         @error('satuan')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                       </div>
                 </div>
-                <button class="btn btn-success btn-icon-split">
+                <button class="btn btn-success btn-icon-split" type="submit">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>

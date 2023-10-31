@@ -6,9 +6,9 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <a href="{{ url('/stuffin/datain') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
             class="fas fa-plus fa-sm text-white-50"></i> Buat Laporan</a>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#printModal">
-            Generate Report
-        </button>
+            <a type="button" class="btn btn-primary" href="/stuffin/print">
+                Generate Report
+            </a>
     </div>
 
     <!-- DataTales Example -->
@@ -16,6 +16,9 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Inbound Logistic</h6>
         </div>
+        @if (session()->has('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -77,10 +80,10 @@
                             <td><a href="/stuffin/{{ $barangmasuk->id }}/editdata" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="/stuffin/{{ $barangmasuk->id }}" method="POST" class="d-inline">
+                                <form action="/stuffin/{{ $barangmasuk->id }}" method="POST" class="d-inline" >
                                     @method('delete')
                                     @csrf
-                                    <button class="btn btn-danger btn-circle">
+                                    <button class="btn btn-danger btn-circle" onclick="return confirm('Yakin?')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -89,40 +92,6 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Generate Report (PDF)</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" action="#">
-                        @csrf
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">From</span>
-                            <input type="date" class="form-control"name="tgldari">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Until</span>
-                            <input type="date" class="form-control" name="tglsampai">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-check"></i>
-                            </span>
-                            <span class="text">Generate</span>
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>

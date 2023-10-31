@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\kodeMaterial;
 use App\Http\Requests\StorekodeMaterialRequest;
 use App\Http\Requests\UpdatekodeMaterialRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KodeMaterialController extends Controller
 {
+    public function pdf(){
+        
+        $collection = kodeMaterial::all();
+        $data = $collection->toArray();
+        $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+        return $pdf->download('Kode_Material.pdf');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,6 +46,9 @@ class KodeMaterialController extends Controller
             'namaMaterial' => 'required',
             'satuan' => 'required',
         ]);
+
+        kodeMaterial::create($validatedData);
+        return redirect('/code')->with('success','Data Ditambahkan');
     }
 
     /**
@@ -53,7 +64,10 @@ class KodeMaterialController extends Controller
      */
     public function edit(kodeMaterial $kodeMaterial)
     {
-        return view('codestufff/dataedit',["title" => "Edit Data Kode Material"]);
+        return view('codestufff/dataedit',[
+            "title" => "Edit Data Kode Material",
+            "kodeMaterial" => $kodeMaterial
+        ]);
     }
 
     /**
@@ -61,7 +75,21 @@ class KodeMaterialController extends Controller
      */
     public function update(UpdatekodeMaterialRequest $request, kodeMaterial $kodeMaterial)
     {
-        //
+        $rules = [
+            'satuan' => 'required',
+        ];
+
+        if ($request->kodeMaterial != $kodeMaterial->kodeMaterial) {
+            $rules['kodeMaterial'] = 'required';
+        }
+        if ($request->namaMaterial != $kodeMaterial->namaMaterial) {
+            $rules['namaMaterial'] = 'required';
+        }
+
+        $validatedData= $request->validate($rules);
+        kodeMaterial::where('id',$kodeMaterial->id)
+                    ->update($validatedData);
+        return redirect('/code')->with('success','Data Diupdate');
     }
 
     /**
@@ -69,6 +97,7 @@ class KodeMaterialController extends Controller
      */
     public function destroy(kodeMaterial $kodeMaterial)
     {
-        //
+        kodeMaterial::destroy($kodeMaterial->id);
+        return redirect('/code')->with('success','Data Dihapus');
     }
 }
