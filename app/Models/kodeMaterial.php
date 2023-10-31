@@ -11,6 +11,14 @@ class kodeMaterial extends Model
     protected $fillable=[
         'kodeMaterial',
         'namaMaterial',
-        'satuan',
+        'satuan'
     ];
+    
+    public function barangmasuk(){
+        return $this->hasMany(barangMasuk::class);
+    }
+
+    public function barangkeluar(){
+        return $this->hasMany(barangKeluar::class);
+    }
 }

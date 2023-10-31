@@ -13,7 +13,11 @@ class KodeMaterialController extends Controller
      */
     public function index()
     {
-        return view('codestufff/codestuff',["title" => "Kode Material"]);
+        $kodematerials = kodeMaterial::all();
+        return view('codestufff/codestuff',[
+            "title" => "Kode Material",
+            "kodematerials" => $kodematerials
+        ]);
     }
 
     /**
@@ -29,7 +33,11 @@ class KodeMaterialController extends Controller
      */
     public function store(StorekodeMaterialRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'kodeMaterial' => 'required',
+            'namaMaterial' => 'required',
+            'satuan' => 'required',
+        ]);
     }
 
     /**

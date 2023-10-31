@@ -48,20 +48,36 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($barangmasuks as $barangmasuk)
                         <tr>
-                            <td>1</td>
-                            <td>Pen12</td>
-                            <td>Test Pen</td>
-                            <td>5</td>
-                            <td>Buah</td>
-                            <td>Bagus</td>
-                            <td>Spare</td>
-                            <td>UPT Surabaya Barat</td>
-                            <td>3 Januari 2023</td>
-                            <td><a href="{{ url('/stuffin/1/editdata') }}" class="btn btn-warning btn-circle">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->kodeMaterial :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->namaMaterial :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>{{ $barangmasuk->jumlah }}</td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->satuan :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>{{ $barangmasuk->kondisi }}</td>
+                            <td>{{ $barangmasuk->peruntukan }}</td>
+                            <td>{{ $barangmasuk->keterangan }}</td>
+                            <td>{{ $barangmasuk->tanggalMasuk }}</td>
+                            <td><a href="/stuffin/{{ $barangmasuk->id }}/editdata" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="#" method="POST" class="d-inline">
+                                <form action="/stuffin/{{ $barangmasuk->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger btn-circle">
@@ -70,6 +86,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

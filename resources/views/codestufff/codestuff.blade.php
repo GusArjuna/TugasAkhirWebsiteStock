@@ -39,15 +39,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($kodematerials as $kodematerial)
                         <tr>
-                            <td>1</td>
-                            <td>PEN12</td>
-                            <td>Test Pen</td>
-                            <td>Buah</td>
-                            <td><a href="{{ url('/code/1/editdata') }}" class="btn btn-warning btn-circle">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kodematerial->kodeMaterial }}</td>
+                            <td>{{ $kodematerial->namaMaterial }}</td>
+                            <td>{{ $kodematerial->satuan }}</td>
+                            <td><a href="/code/{{ $kodematerial->id }}/editdata" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="#" method="POST" class="d-inline">
+                                <form action="/code/{{ $kodematerial->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger btn-circle">
@@ -56,6 +57,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

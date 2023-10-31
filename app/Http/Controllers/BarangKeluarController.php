@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\barangKeluar;
 use App\Http\Requests\StorebarangKeluarRequest;
 use App\Http\Requests\UpdatebarangKeluarRequest;
+use App\Models\kodeMaterial;
 
 class BarangKeluarController extends Controller
 {
@@ -13,7 +14,13 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        return view('stuffoutf/stuffout',["title" => "Barang Keluar"]);
+        $kodematerials = kodeMaterial::all();
+        $barangkeluars = barangKeluar::all();
+        return view('stuffoutf/stuffout',[
+            "title" => "Barang Keluar",
+            "barangkeluars" => $barangkeluars,
+            "kodematerials" => $kodematerials,
+        ]);
     }
 
     /**
@@ -29,7 +36,7 @@ class BarangKeluarController extends Controller
      */
     public function store(StorebarangKeluarRequest $request)
     {
-        //
+        dd($request);
     }
 
     /**

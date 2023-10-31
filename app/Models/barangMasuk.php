@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class barangMasuk extends Model
 {
@@ -16,4 +17,9 @@ class barangMasuk extends Model
         'keterangan',
         'tanggalMasuk'
     ];
+
+    public function kodematerial(): BelongsTo
+    {
+        return $this->belongsTo(kodeMaterial::class,);
+    }
 }

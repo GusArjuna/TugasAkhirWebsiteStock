@@ -28,7 +28,7 @@ Route::get('/stock', function () {
 Route::controller(KodeMaterialController::class)->group(function () {
     Route::get('/code', 'index');
     Route::get('/code/datain', 'create');
-    Route::post('/code/formin', 'store');
+    Route::post('/code/datain', 'store');
     Route::get('/code/{kode}/editdata', 'edit');
     Route::post('/code/print', 'pdf');
     Route::delete('/code/{kode}', 'destroy');
@@ -38,7 +38,7 @@ Route::controller(KodeMaterialController::class)->group(function () {
 Route::controller(BarangMasukController::class)->group(function () {
     Route::get('/stuffin', 'index');
     Route::get('/stuffin/datain', 'create');
-    Route::post('/stuffin/formin', 'store');
+    Route::post('/stuffin/datain', 'store');
     Route::get('/stuffin/{instuff}/editdata', 'edit');
     Route::post('/stuffin/print', 'pdf');
     Route::delete('/stuffin/{instuff}', 'destroy');
@@ -48,7 +48,7 @@ Route::controller(BarangMasukController::class)->group(function () {
 Route::controller(BarangKeluarController::class)->group(function () {
     Route::get('/stuffout', 'index');
     Route::get('/stuffout/datain', 'create');
-    Route::post('/stuffout/formin', 'store');
+    Route::post('/stuffout/datain', 'store');
     Route::get('/stuffout/{outstuff}/editdata', 'edit');
     Route::post('/stuffout/print', 'pdf');
     Route::delete('/stuffout/{outstuff}', 'destroy');

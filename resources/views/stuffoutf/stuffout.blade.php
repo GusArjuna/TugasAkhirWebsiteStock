@@ -50,21 +50,37 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($barangkeluars as $barangkeluar)
                         <tr>
-                            <td>1</td>
-                            <td>Pen12</td>
-                            <td>Test Pen</td>
-                            <td>3</td>
-                            <td>Buah</td>
-                            <td>Bagus</td>
-                            <td>Spare</td>
-                            <td>Peminjaman</td>
-                            <td>UPT Surabaya Barat</td>
-                            <td>4 Januari 2023</td>
-                            <td><a href="{{ url('/stuffout/1/editdata') }}" class="btn btn-warning btn-circle">
+                            <td>{{ $loop->iteration }}</td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangkeluar->kodeMaterial)? $kodematerial->kodeMaterial :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangkeluar->kodeMaterial)? $kodematerial->namaMaterial :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>{{ $barangkeluar->jumlah }}</td>
+                            <td>@foreach ($kodematerials as $kodematerial)
+                                {{ 
+                                    ($kodematerial->kodeMaterial==$barangkeluar->kodeMaterial)? $kodematerial->satuan :""
+                                }}
+                                @endforeach
+                            </td>
+                            <td>{{ $barangkeluar->kondisi }}</td>
+                            <td>{{ $barangkeluar->peruntukan }}</td>
+                            <td>{{ $barangkeluar->keperluan }}</td>
+                            <td>{{ $barangkeluar->keterangan }}</td>
+                            <td>{{ $barangkeluar->tanggalKeluar }}</td>
+                            <td><a href="/stuffout/{{ $barangkeluar->id }}/editdata" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="#" method="POST" class="d-inline">
+                                <form action="/stuffout/{{ $barangkeluar->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger btn-circle">
@@ -73,6 +89,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

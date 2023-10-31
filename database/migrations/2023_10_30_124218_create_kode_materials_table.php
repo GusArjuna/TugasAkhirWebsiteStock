@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('kode_materials', function (Blueprint $table) {
             $table->id();
             $table->String('kodeMaterial')->unique();
-            $table->String('namaMaterial')->unique();
+            $table->String('namaMaterial');
+            $table->String('satuan');
             $table->timestamps();
         });
     }
