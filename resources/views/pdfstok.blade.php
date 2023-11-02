@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PT. INDOTANK - PRINT</title>
+    <title>INVENTARIS PLN - PRINT</title>
     <style>
         :root {
   --blue: #4e73df;
@@ -11334,7 +11334,7 @@ body.sidebar-toggled footer.sticky-footer {
                         @endforeach
                     </tbody>
                    </table>
-               </div>
+               </div>{{ dd(); }}
            </div>
        </div>
    </div>

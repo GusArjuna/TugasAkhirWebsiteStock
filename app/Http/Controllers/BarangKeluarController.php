@@ -7,6 +7,7 @@ use App\Http\Requests\StorebarangKeluarRequest;
 use App\Http\Requests\UpdatebarangKeluarRequest;
 use App\Models\kodeMaterial;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
 {
@@ -28,12 +29,42 @@ class BarangKeluarController extends Controller
     public function index()
     {
         $kodematerials = kodeMaterial::all();
-        $barangkeluars = barangKeluar::all();
+        $barangkeluars = barangKeluar::paginate(10);
         return view('stuffoutf/stuffout',[
             "title" => "Barang Keluar",
             "barangkeluars" => $barangkeluars,
             "kodematerials" => $kodematerials,
         ]);
+    }
+
+    public function printdelete(Request $request)
+    {   
+        if($request->delete){
+            barangKeluar::destroy($request->delete);
+            return redirect('/stuffout')->with('success','Data Dihapus');
+        }elseif($request->generate){
+            $lastId = barangKeluar::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
+            $data = [];
+            for ($i = 1; $i <= $lastId; $i++) {
+                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+
+                if ($request->has($inputName)) {
+                    // Melakukan pencarian berdasarkan nilai input dari request pada model barangKeluar
+                    $foundMaterial = barangKeluar::find($request->$inputName);
+
+                    if ($foundMaterial) {
+                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                    }
+                }
+            }
+            $kodematerials = kodeMaterial::all();
+            $pdf = Pdf::loadView('stuffoutf.pdf', [
+                "kodematerials" => $kodematerials,
+                "barangkeluars" => $data
+            ]);
+            return $pdf->download('Laporan_Barang_Keluar.pdf');
+        }
+        
     }
 
     /**

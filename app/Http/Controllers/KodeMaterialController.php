@@ -6,11 +6,11 @@ use App\Models\kodeMaterial;
 use App\Http\Requests\StorekodeMaterialRequest;
 use App\Http\Requests\UpdatekodeMaterialRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 class KodeMaterialController extends Controller
 {
-    public function pdf(){
-        
+    public function pdf(Request $request){
         $collection = kodeMaterial::all();
         $data = $collection->toArray();
         $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
@@ -21,7 +21,7 @@ class KodeMaterialController extends Controller
      */
     public function index()
     {
-        $kodematerials = kodeMaterial::all();
+        $kodematerials = kodeMaterial::paginate(10);
         return view('codestufff/codestuff',[
             "title" => "Kode Material",
             "kodematerials" => $kodematerials
@@ -39,6 +39,33 @@ class KodeMaterialController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function printdelete(Request $request)
+    {   
+        if($request->delete){
+            kodeMaterial::destroy($request->delete);
+            return redirect('/code')->with('success','Data Dihapus');
+        }elseif($request->generate){
+            $lastId = kodeMaterial::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
+            $data = [];
+            for ($i = 1; $i <= $lastId; $i++) {
+                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+
+                if ($request->has($inputName)) {
+                    // Melakukan pencarian berdasarkan nilai input dari request pada model kodeMaterial
+                    $foundMaterial = kodeMaterial::find($request->$inputName);
+
+                    if ($foundMaterial) {
+                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                    }
+                }
+            }
+            $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+            return $pdf->download('Kode_Material.pdf');
+        }
+        
+    }
+
     public function store(StorekodeMaterialRequest $request)
     {
         $validatedData = $request->validate([
@@ -99,7 +126,6 @@ class KodeMaterialController extends Controller
      */
     public function destroy(kodeMaterial $kodeMaterial)
     {
-        kodeMaterial::destroy($kodeMaterial->id);
-        return redirect('/code')->with('success','Data Dihapus');
+        
     }
 }

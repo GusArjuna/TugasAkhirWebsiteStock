@@ -4,9 +4,11 @@
     <h1 class="h3 mb-2 text-gray-800">Ketersediaan Barang</h1>
     <p class="mb-4">Berisi Laporan Jumlah Barang pada kantor</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a type="button" class="btn btn-primary" href="/stock/print">
-            Generate Report
-        </a>
+        <form action="/printstok" method="post">
+            @csrf
+            <button type="submit" value="true" name="generate" class="btn btn-primary">
+                Generate Report
+            </button>
     </div>
 
     <!-- DataTales Example -->
@@ -15,10 +17,12 @@
             <h6 class="m-0 font-weight-bold text-primary">Ketersediaan Barang</h6>
         </div>
         <div class="card-body">
+            {{ $kodematerials->links() }}
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
@@ -30,7 +34,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>No</th>
+                            <th></th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
                             <th>Stok</th>
@@ -42,6 +46,7 @@
                     <tbody>
                         @foreach ($kodematerials as $kodematerial)
                         <tr>
+                            <td> <input type="checkbox" name="print{{ $kodematerial->id }}" id="print{{ $kodematerial->id }}" value="{{ $kodematerial->id }}"> </td>
                             <td> {{ $loop->iteration }} </td>
                             <td> {{ $kodematerial->kodeMaterial}} </td>
                             <td> {{ $kodematerial->namaMaterial}} </td>
@@ -53,6 +58,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </form>
             </div>
         </div>
     </div>

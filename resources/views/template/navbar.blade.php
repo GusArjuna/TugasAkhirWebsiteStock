@@ -105,10 +105,12 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
+                    {{-- Search Bar --}}
+                    {{-- @yield('search') --}}
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -186,7 +188,7 @@
             </div>
         </div>
     </div>
-
+    @yield('skript')
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

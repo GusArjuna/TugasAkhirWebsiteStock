@@ -27,7 +27,7 @@ class displayer extends Controller
 
     public function dashboard()
     {
-        $kodematerials = kodeMaterial::all();
+        $kodematerials = kodeMaterial::paginate(10);
         return view('home',[
             "title" => "Dashboard",
             "kodematerials" => $kodematerials,
@@ -36,10 +36,60 @@ class displayer extends Controller
 
     public function stok()
     {
-        $kodematerials = kodeMaterial::all();
+        $kodematerials = kodeMaterial::paginate(10);
         return view('stock',[
             "title" => "Stock",
             "kodematerials" => $kodematerials,
         ]);
+    }
+
+    public function printstok(Request $request)
+    {   
+        if($request->generate){
+            $lastId = kodeMaterial::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
+            $data = [];
+            for ($i = 1; $i <= $lastId; $i++) {
+                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+
+                if ($request->has($inputName)) {
+                    // Melakukan pencarian berdasarkan nilai input dari request pada model kodeMaterial
+                    $foundMaterial = kodeMaterial::find($request->$inputName);
+
+                    if ($foundMaterial) {
+                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                    }
+                }
+            }
+            $pdf = Pdf::loadView('pdfstok', [
+                "kodematerials" => $data,
+            ]);
+            return $pdf->download('Laporan_Stok.pdf');
+        }
+        
+    }
+
+    public function printdashboard(Request $request)
+    {   
+        if($request->generate){
+            $lastId = kodeMaterial::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
+            $data = [];
+            for ($i = 1; $i <= $lastId; $i++) {
+                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+
+                if ($request->has($inputName)) {
+                    // Melakukan pencarian berdasarkan nilai input dari request pada model kodeMaterial
+                    $foundMaterial = kodeMaterial::find($request->$inputName);
+
+                    if ($foundMaterial) {
+                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                    }
+                }
+            }
+            $pdf = Pdf::loadView('pdfdashboard', [
+                "kodematerials" => $data,
+            ]);
+            return $pdf->download('Laporan_Rak.pdf');
+        }
+        
     }
 }
