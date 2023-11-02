@@ -48,7 +48,7 @@ class displayer extends Controller
 
     public function dashboard()
     {
-        $fsn = fsntable::paginate(10);
+        $fsn = fsntable::paginate(15);
         return view('home',[
             "title" => "Dashboard",
             "fsns" => $fsn,
@@ -57,7 +57,7 @@ class displayer extends Controller
 
     public function stok()
     {
-        $kodematerials = kodeMaterial::paginate(10);
+        $kodematerials = kodeMaterial::paginate(15);
         return view('stock',[
             "title" => "Stock",
             "kodematerials" => $kodematerials,
