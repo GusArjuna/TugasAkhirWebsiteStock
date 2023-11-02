@@ -29,7 +29,7 @@ class BarangMasukController extends Controller
     public function index()
     {
         $kodematerials = kodeMaterial::all();
-        $barangmasuks = barangMasuk::paginate(10);
+        $barangmasuks = barangMasuk::paginate(15);
         return view('stuffinf/stuffin',[
             "title" => "Barang Masuk",
             "barangmasuks" => $barangmasuks,

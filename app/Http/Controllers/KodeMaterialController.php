@@ -21,7 +21,7 @@ class KodeMaterialController extends Controller
      */
     public function index()
     {
-        $kodematerials = kodeMaterial::paginate(10);
+        $kodematerials = kodeMaterial::paginate(15);
         return view('codestufff/codestuff',[
             "title" => "Kode Material",
             "kodematerials" => $kodematerials

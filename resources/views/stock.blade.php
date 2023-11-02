@@ -35,6 +35,7 @@
                     <tfoot>
                         <tr>
                             <th></th>
+                            <th>No</th>
                             <th>Kode Katalog</th>
                             <th>Nama Material</th>
                             <th>Stok</th>
