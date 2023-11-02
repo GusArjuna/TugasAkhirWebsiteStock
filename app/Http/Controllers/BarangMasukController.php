@@ -43,26 +43,52 @@ class BarangMasukController extends Controller
             barangMasuk::destroy($request->delete);
             return redirect('/stuffin')->with('success','Data Dihapus');
         }elseif($request->generate){
+            $cek=false;
             $lastId = barangMasuk::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
             $data = [];
             for ($i = 1; $i <= $lastId; $i++) {
-                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
-
-                if ($request->has($inputName)) {
-                    // Melakukan pencarian berdasarkan nilai input dari request pada model barangMasuk
-                    $foundMaterial = barangMasuk::find($request->$inputName);
-
-                    if ($foundMaterial) {
-                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
-                    }
+                $inputName = 'print' . $i;
+                if($request->$inputName){
+                    $cek=true;
+                    break;
+                }elseif(!$request->$inputName){
+                    $cek=false;
                 }
             }
-            $kodematerials = kodeMaterial::all();
-            $pdf = Pdf::loadView('stuffinf.pdf', [
-                "kodematerials" => $kodematerials,
-                "barangmasuks" => $data
-            ]);
-            return $pdf->download('Laporan_Barang_Masuk.pdf');
+            if($cek){
+                for ($i = 1; $i <= $lastId; $i++) {
+                    $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+    
+                    if ($request->has($inputName)) {
+                        // Melakukan pencarian berdasarkan nilai input dari request pada model barangMasuk
+                        $foundMaterial = barangMasuk::find($request->$inputName);
+    
+                        if ($foundMaterial) {
+                            $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                        }
+                    }
+                }
+                $kodematerials = kodeMaterial::all();
+                $pdf = Pdf::loadView('stuffinf.pdf', [
+                    "kodematerials" => $kodematerials,
+                    "barangmasuks" => $data
+                ]);
+                return $pdf->download('Laporan_Barang_Masuk.pdf');
+            }else{
+                $kodematerials = kodeMaterial::all();
+                $kodematerials = $kodematerials->toArray();
+                $barangmasuks = barangMasuk::all();
+                $barangmasuks = $barangmasuks->toArray();
+                $pdf = Pdf::loadView('stuffinf.pdf', [
+                    "kodematerials" => $kodematerials,
+                    "barangmasuks" => $barangmasuks
+                ]);
+                return $pdf->download('Laporan_Barang_Masuk.pdf');
+            } 
+            // ------------------------------
+            
+            
+            
         }
         
     }

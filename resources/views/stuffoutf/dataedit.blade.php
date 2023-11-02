@@ -79,6 +79,16 @@
                         @enderror
                       </div>
                 </div>
+                <div class="row g-3">
+                  <div class="col-md-3 mb-3">
+                    <label for="peminjam" class="form-label">Nama Peminjam</label>
+                    <input class="form-control @error('peminjam') is-invalid @enderror" type="text" placeholder="Ketikkan Nama Peminjam..." name="peminjam" id="peminjam" value="{{ old('peminjam',$barangKeluar->peminjam) }}" onkeyup="this.value = this.value.toUpperCase()" required>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="divisi" class="form-label">Nama Divisi</label>
+                    <input class="form-control @error('divisi') is-invalid @enderror" type="text" placeholder="Ketikkan Nama Divisi Peminjam..." name="divisi" id="divisi" value="{{ old('divisi',$barangKeluar->divisi) }}" onkeyup="this.value = this.value.toUpperCase()" required>
+                  </div>
+                </div>
                 <button class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>

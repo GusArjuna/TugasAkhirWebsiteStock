@@ -27,29 +27,29 @@
                     @enderror
                   </div>
                 </div>
-                <div class="row g-3">
-                      <div class="col-md-3 mb-3">
-                        <label for="jumlah" class="form-label">Jumlah</label>
-                        <input class="form-control @error('jumlah') is-invalid @enderror" type="text" placeholder="Ketikkan jumlah..." name="jumlah" id="jumlah" value="{{ old('jumlah') }}" onkeyup="this.value = this.value.toUpperCase()" required>
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <label for="keperluan" class="form-label">Kondisi</label>
-                        <select class="form-control @error('kondisi') is-invalid @enderror" aria-label=".form-select-sm example" name="kondisi" id="kondisi" >
-                            <option value="">- Pilih Salah Satu -</option>
-                            @if (old('kondisi')=='BARU')
-                              <option value="BARU" selected>BARU</option>
-                              <option value="BAGUS">BAGUS</option>
-                            @elseif (old('kondisi')=='BAGUS')
-                              <option value="BARU" >BARU</option>
-                              <option value="BAGUS" selected>BAGUS</option>
-                            @else
-                              <option value="BARU">BARU</option>
-                              <option value="BAGUS">BAGUS</option>
-                            @endif
-                          </select>
-                      </div>
-                </div>
-                <div class="row g-3">
+                  <div class="row g-3">
+                        <div class="col-md-3 mb-3">
+                          <label for="jumlah" class="form-label">Jumlah</label>
+                          <input class="form-control @error('jumlah') is-invalid @enderror" type="text" placeholder="Ketikkan jumlah..." name="jumlah" id="jumlah" value="{{ old('jumlah') }}" onkeyup="this.value = this.value.toUpperCase()" required>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                          <label for="keperluan" class="form-label">Kondisi</label>
+                          <select class="form-control @error('kondisi') is-invalid @enderror" aria-label=".form-select-sm example" name="kondisi" id="kondisi" >
+                              <option value="">- Pilih Salah Satu -</option>
+                              @if (old('kondisi')=='BARU')
+                                <option value="BARU" selected>BARU</option>
+                                <option value="BAGUS">BAGUS</option>
+                              @elseif (old('kondisi')=='BAGUS')
+                                <option value="BARU" >BARU</option>
+                                <option value="BAGUS" selected>BAGUS</option>
+                              @else
+                                <option value="BARU">BARU</option>
+                                <option value="BAGUS">BAGUS</option>
+                              @endif
+                            </select>
+                        </div>
+                  </div>
+                  <div class="row g-3">
                     <div class="col-md-3 mb-3">
                         <label for="keperluan" class="form-label">Keperluan</label>
                         <select class="form-control @error('keperluan') is-invalid @enderror" aria-label=".form-select-sm example" name="keperluan" id="keperluan">
@@ -77,6 +77,16 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                       </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-3 mb-3">
+                    <label for="peminjam" class="form-label">Nama Peminjam</label>
+                    <input class="form-control @error('peminjam') is-invalid @enderror" type="text" placeholder="Ketikkan Nama Peminjam..." name="peminjam" id="peminjam" value="{{ old('peminjam') }}" onkeyup="this.value = this.value.toUpperCase()" required>
+                  </div>
+                  <div class="col-md-3 mb-3">
+                    <label for="divisi" class="form-label">Nama Divisi</label>
+                    <input class="form-control @error('divisi') is-invalid @enderror" type="text" placeholder="Ketikkan Nama Divisi Peminjam..." name="divisi" id="divisi" value="{{ old('divisi') }}" onkeyup="this.value = this.value.toUpperCase()" required>
+                  </div>
                 </div>
                 <button class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">

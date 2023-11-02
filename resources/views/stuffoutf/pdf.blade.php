@@ -11309,6 +11309,8 @@ body.sidebar-toggled footer.sticky-footer {
                           <th>Peruntukan</th>
                           <th>Keperluan</th>
                           <th>Keterangan</th>
+                          <th>Nama Peminjam</th>
+                          <th>Divisi</th>
                           <th>Tanggal Keluar</th>
                       </tr>
                   </thead>
@@ -11323,6 +11325,8 @@ body.sidebar-toggled footer.sticky-footer {
                           <th>Peruntukan</th>
                           <th>Keperluan</th>
                           <th>Keterangan</th>
+                          <th>Nama Peminjam</th>
+                          <th>Divisi</th>
                           <th>Tanggal Keluar</th>
                       </tr>
                   </tfoot>
@@ -11358,6 +11362,8 @@ body.sidebar-toggled footer.sticky-footer {
                           </td>
                           <td>{{ $barangkeluar['keperluan'] }}</td>
                           <td>{{ $barangkeluar['keterangan'] }}</td>
+                          <td>{{ $barangkeluar['peminjam'] }}</td>
+                          <td>{{ $barangkeluar['divisi'] }}</td>
                           <td>{{ $barangkeluar['tanggalKeluar'] }}</td>
                       </tr>
                       @endforeach

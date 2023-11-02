@@ -50,6 +50,8 @@
                             <th>Peruntukan</th>
                             <th>Keperluan</th>
                             <th>Keterangan</th>
+                            <th>Nama Peminjam</th>
+                            <th>Divisi</th>
                             <th>Tanggal Keluar</th>
                             <th>Aksi</th>
                         </tr>
@@ -66,6 +68,8 @@
                             <th>Peruntukan</th>
                             <th>Keperluan</th>
                             <th>Keterangan</th>
+                            <th>Nama Peminjam</th>
+                            <th>Divisi</th>
                             <th>Tanggal Keluar</th>
                             <th>Aksi</th>
                         </tr>
@@ -102,6 +106,8 @@
                                 @endforeach</td>
                             <td>{{ $barangkeluar->keperluan }}</td>
                             <td>{{ $barangkeluar->keterangan }}</td>
+                            <td>{{ $barangkeluar->peminjam }}</td>
+                            <td>{{ $barangkeluar->divisi }}</td>
                             <td>{{ $barangkeluar->tanggalKeluar }}</td>
                             <td><a href="/stuffout/{{ $barangkeluar->id }}/editdata" class="btn btn-warning btn-circle">
                                 <i class="fas fa-edit"></i>

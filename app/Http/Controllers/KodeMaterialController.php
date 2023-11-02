@@ -46,22 +46,39 @@ class KodeMaterialController extends Controller
             kodeMaterial::destroy($request->delete);
             return redirect('/code')->with('success','Data Dihapus');
         }elseif($request->generate){
+            $cek=false;
             $lastId = kodeMaterial::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
             $data = [];
             for ($i = 1; $i <= $lastId; $i++) {
-                $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
-
-                if ($request->has($inputName)) {
-                    // Melakukan pencarian berdasarkan nilai input dari request pada model kodeMaterial
-                    $foundMaterial = kodeMaterial::find($request->$inputName);
-
-                    if ($foundMaterial) {
-                        $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
-                    }
+                $inputName = 'print' . $i;
+                if($request->$inputName){
+                    $cek=true;
+                    break;
+                }elseif(!$request->$inputName){
+                    $cek=false;
                 }
             }
-            $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
-            return $pdf->download('Kode_Material.pdf');
+            if($cek){
+                for ($i = 1; $i <= $lastId; $i++) {
+                    $inputName = 'print' . $i; // Membuat nama input berdasarkan iterasi
+    
+                    if ($request->has($inputName)) {
+                        // Melakukan pencarian berdasarkan nilai input dari request pada model kodeMaterial
+                        $foundMaterial = kodeMaterial::find($request->$inputName);
+    
+                        if ($foundMaterial) {
+                            $data[] = $foundMaterial; // Menambahkan model yang cocok ke dalam array $data
+                        }
+                    }
+                }
+                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+                return $pdf->download('Kode_Material.pdf');
+            }else{
+                $collection = kodeMaterial::all();
+                $data = $collection->toArray();
+                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+                return $pdf->download('Kode_Material.pdf');
+            }
         }
         
     }

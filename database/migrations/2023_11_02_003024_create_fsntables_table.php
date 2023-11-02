@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kode_materials', function (Blueprint $table) {
+        Schema::create('fsntables', function (Blueprint $table) {
             $table->id();
-            $table->String('kodeMaterial')->unique();
+            $table->String('kodeMaterial');
             $table->String('namaMaterial');
+            $table->String('lokasi');
             $table->String('satuan');
             $table->String('peruntukan');
-            $table->String('stok')->nullable();
-            $table->integer('frekuensi')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kode_materials');
+        Schema::dropIfExists('fsntables');
     }
 };

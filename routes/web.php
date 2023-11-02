@@ -26,6 +26,7 @@ Route::controller(displayer::class)->group(function () {
     Route::get('/stock/print', 'pdfstok');
     Route::post('/printdashboard', 'printdashboard');
     Route::post('/printstok', 'printstok');
+    Route::post('/updatefsn', 'fsnupdate');
 });
 
 Route::controller(KodeMaterialController::class)->group(function () {

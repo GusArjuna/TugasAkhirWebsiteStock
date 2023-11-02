@@ -17,8 +17,12 @@
     <h1 class="h3 mb-2 text-gray-800">Inventaris Gudang PLN</h1>
     <p class="mb-4">Berisi beberapa laporan yang akan dimuat</p>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-            class="fas fa-undo fa-sm text-white-50"></i> Update Rak</a>
+        <form action="/updatefsn" method="post">
+            @csrf
+            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+                <i class="fas fa-undo fa-sm text-white-50"></i> Update Rak</a>
+            </button>
+        </form>
             <form action="/printdashboard" method="post">
                 @csrf
                 <button type="submit" value="true" name="generate" class="btn btn-primary">
@@ -30,8 +34,11 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Rak Inventaris</h6>
         </div>
+        @if (session()->has('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
         <div class="card-body">
-            {{ $kodematerials->links() }}
+            {{ $fsns->links() }}
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -57,15 +64,15 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($kodematerials as $kodematerial)
+                        @foreach ($fsns as $fsn)
                         <tr>
-                            <td> <input type="checkbox" name="print{{ $kodematerial->id }}" id="print{{ $kodematerial->id }}" value="{{ $kodematerial->id }}"> </td>
+                            <td> <input type="checkbox" name="print{{ $fsn->id }}" id="print{{ $fsn->id }}" value="{{ $fsn->id }}"> </td>
                             <td> {{ $loop->iteration }} </td>
-                            <td> {{ $kodematerial->kodeMaterial}} </td>
-                            <td> {{ $kodematerial->namaMaterial}} </td>
-                            <td> Rak {{ $loop->iteration }} </td>
-                            <td> {{ $kodematerial->satuan}} </td>
-                            <td> {{ $kodematerial->peruntukan}} </td>
+                            <td> {{ $fsn->kodeMaterial}} </td>
+                            <td> {{ $fsn->namaMaterial}} </td>
+                            <td> {{ $fsn->lokasi}} </td>
+                            <td> {{ $fsn->satuan}} </td>
+                            <td> {{ $fsn->peruntukan}} </td>
                         </tr>
                         @endforeach
                     </tbody>

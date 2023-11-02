@@ -11319,20 +11319,20 @@ body.sidebar-toggled footer.sticky-footer {
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($kodematerials as $kodematerial)
+                        @foreach ($fsns as $fsn)
                         <tr>
-                            <td> {{ $loop->iteration }} </td>
-                            <td> {{ $kodematerial['kodeMaterial']}} </td>
-                            <td> {{ $kodematerial['namaMaterial']}} </td>
-                            <td> Rak ... </td>
-                            <td> {{ $kodematerial['satuan']}} </td>
-                            <td> {{ $kodematerial['peruntukan']}} </td>
+                          <td> {{ $loop->iteration }} </td>
+                          <td> {{ $fsn['kodeMaterial']}} </td>
+                          <td> {{ $fsn['namaMaterial']}} </td>
+                          <td> {{ $fsn['lokasi']}} </td>
+                          <td> {{ $fsn['satuan']}} </td>
+                          <td> {{ $fsn['peruntukan']}} </td>
                         </tr>
                         @endforeach
                     </tbody>
                    </table>
                </div>
-           </div>{{ dd(); }}
+           </div>
        </div>
    </div>
 </body>

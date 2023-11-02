@@ -15,6 +15,8 @@ class barangKeluar extends Model
         'kondisi',
         'keperluan',
         'keterangan',
+        'peminjam',
+        'divisi',
         'tanggalKeluar'
     ];
     public function user(): BelongsTo

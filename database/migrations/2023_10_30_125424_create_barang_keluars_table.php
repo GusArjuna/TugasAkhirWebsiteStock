@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('kondisi');
             $table->string('keperluan');
             $table->string('keterangan');
+            $table->string('peminjam');
+            $table->string('divisi');
             $table->date('tanggalKeluar');
             $table->timestamps();
         });

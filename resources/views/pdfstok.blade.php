@@ -11334,7 +11334,7 @@ body.sidebar-toggled footer.sticky-footer {
                         @endforeach
                     </tbody>
                    </table>
-               </div>{{ dd(); }}
+               </div>
            </div>
        </div>
    </div>
