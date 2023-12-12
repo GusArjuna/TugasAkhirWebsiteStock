@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('fsntables', function (Blueprint $table) {
             $table->id();
             $table->String('kodeMaterial');
-            $table->String('namaMaterial');
+            $table->float('tor');
+            $table->String('kategori');
             $table->String('lokasi');
-            $table->String('satuan');
-            $table->String('peruntukan');
             $table->timestamps();
         });
     }

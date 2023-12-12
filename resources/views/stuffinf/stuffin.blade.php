@@ -73,31 +73,38 @@
                         <tr>
                             <td><input type="checkbox" name="print{{ $barangmasuk->id }}" id="print{{ $barangmasuk->id }}" value="{{ $barangmasuk->id }}"></td>
                             <td>{{ $loop->iteration }}</td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->kodeMaterial :""
-                                }}
+                            <td>
+                                @foreach ($kodematerials as $kodematerial)
+                                    @if ($kodematerial->kodeMaterial == $barangmasuk->kodeMaterial)
+                                        {{ $kodematerial->kodeMaterial }}
+                                        @break
+                                    @endif
                                 @endforeach
                             </td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->namaMaterial :""
-                                }}
+                            <td>
+                                @foreach ($kodematerials as $kodematerial)
+                                    @if ($kodematerial->kodeMaterial == $barangmasuk->kodeMaterial)
+                                        {{ $kodematerial->namaMaterial }}
+                                        @break
+                                    @endif
                                 @endforeach
                             </td>
                             <td>{{ $barangmasuk->jumlah }}</td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->satuan :""
-                                }}
+                            <td>
+                                @foreach ($kodematerials as $kodematerial)
+                                    @if ($kodematerial->kodeMaterial == $barangmasuk->kodeMaterial)
+                                        {{ $kodematerial->satuan }}
+                                        @break
+                                    @endif
                                 @endforeach
                             </td>
                             <td>{{ $barangmasuk->kondisi }}</td>
                             <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial->kodeMaterial==$barangmasuk->kodeMaterial)? $kodematerial->peruntukan :""
-                                }}
-                                @endforeach</td>
+                                @if ($kodematerial->kodeMaterial == $barangmasuk->kodeMaterial)
+                                    {{ $kodematerial->peruntukan }}
+                                    @break
+                                @endif
+                            @endforeach</td>
                             <td>{{ $barangmasuk->keterangan }}</td>
                             <td>{{ $barangmasuk->tanggalMasuk }}</td>
                             <td><a href="/stuffin/{{ $barangmasuk->id }}/editdata" class="btn btn-warning btn-circle">

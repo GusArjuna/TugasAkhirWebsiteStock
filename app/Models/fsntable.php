@@ -10,9 +10,8 @@ class fsntable extends Model
     use HasFactory;
     protected $fillable=[
         'kodeMaterial',
-        'namaMaterial',
-        'peruntukan',
-        'satuan',
+        'tor',
+        'kategori',
         'lokasi'
     ];
 }

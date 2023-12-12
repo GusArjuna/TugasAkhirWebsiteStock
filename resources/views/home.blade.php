@@ -50,6 +50,8 @@
                             <th>Lokasi Gudang</th>
                             <th>Satuan</th>
                             <th>Peruntukan</th>
+                            <th>Nilai TOR</th>
+                            <th>Kategori</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -61,6 +63,8 @@
                             <th>Lokasi Gudang</th>
                             <th>Satuan</th>
                             <th>Peruntukan</th>
+                            <th>Nilai TOR</th>
+                            <th>Kategori</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -68,11 +72,35 @@
                         <tr>
                             <td> <input type="checkbox" name="print{{ $fsn->id }}" id="print{{ $fsn->id }}" value="{{ $fsn->id }}"> </td>
                             <td> {{ $loop->iteration }} </td>
-                            <td> {{ $fsn->kodeMaterial}} </td>
-                            <td> {{ $fsn->namaMaterial}} </td>
+                            <td> 
+                                @foreach ($kodematerials as $kodematerial)
+                                    @if ($kodematerial->kodeMaterial == $fsn->kodeMaterial)
+                                        {{ $kodematerial->kodeMaterial }}
+                                        @break
+                                    @endif
+                                @endforeach
+                             </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial->kodeMaterial == $fsn->kodeMaterial)
+                                    {{ $kodematerial->namaMaterial }}
+                                    @break
+                                @endif
+                            @endforeach </td>
                             <td> {{ $fsn->lokasi}} </td>
-                            <td> {{ $fsn->satuan}} </td>
-                            <td> {{ $fsn->peruntukan}} </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial->kodeMaterial == $fsn->kodeMaterial)
+                                    {{ $kodematerial->satuan }}
+                                    @break
+                                @endif
+                            @endforeach </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial->kodeMaterial == $fsn->kodeMaterial)
+                                    {{ $kodematerial->peruntukan }}
+                                    @break
+                                @endif
+                            @endforeach </td>
+                            <td> {{ $fsn->tor}} </td>
+                            <td> {{ $fsn->kategori}} </td>
                         </tr>
                         @endforeach
                     </tbody>
