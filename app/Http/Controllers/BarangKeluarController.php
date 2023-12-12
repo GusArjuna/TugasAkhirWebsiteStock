@@ -27,12 +27,33 @@ class BarangKeluarController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
         $kodematerials = kodeMaterial::all();
-        $barangkeluars = barangKeluar::paginate(15);
+        $barangkeluars = barangKeluar::query();
+        if(request('search')){
+            $querytambahans=kodeMaterial::where('peruntukan','like','%'.request('search').'%')
+                                        ->orWhere('namaMaterial','like','%'.request('search').'%')
+                                        ->orWhere('satuan','like','%'.request('search').'%')->get();
+                                        
+            $barangkeluars->where('kodeMaterial','like','%'.request('search').'%')
+                                        ->orWhere('jumlah','like','%'.request('search').'%')
+                                        ->orWhere('kondisi','like','%'.request('search').'%')
+                                        ->orWhere('keterangan','like','%'.request('search').'%')
+                                        ->orWhere('keperluan','like','%'.request('search').'%')
+                                        ->orWhere('keterangan','like','%'.request('search').'%')
+                                        ->orWhere('peminjam','like','%'.request('search').'%')
+                                        ->orWhere('divisi','like','%'.request('search').'%')
+                                        ->orWhere('tanggalKeluar','like','%'.request('search').'%');
+            
+            foreach($querytambahans as $querytambahan){
+                $querybantuan= (string)$querytambahan->kodeMaterial;
+                $barangkeluars->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+            }
+        }
+        
         return view('stuffoutf/stuffout',[
             "title" => "Barang Keluar",
-            "barangkeluars" => $barangkeluars,
+            "barangkeluars" => $barangkeluars->paginate(15),
             "kodematerials" => $kodematerials,
         ]);
     }

@@ -106,7 +106,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     {{-- Search Bar --}}
-                    {{-- @yield('search') --}}
+                    @yield('search')
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 

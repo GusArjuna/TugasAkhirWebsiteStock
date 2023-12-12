@@ -285,20 +285,43 @@ class displayer extends Controller
     public function dashboard()
     {
         $kodematerials = kodeMaterial::all();
-        $fsn = fsntable::paginate(15);
+        $fsn = fsntable::query();
+        if(request('search')){
+            $querytambahans=kodeMaterial::where('peruntukan','like','%'.request('search').'%')
+                                        ->orWhere('namaMaterial','like','%'.request('search').'%')
+                                        ->orWhere('satuan','like','%'.request('search').'%')->get();
+                                        
+            $fsn->where('kodeMaterial','like','%'.request('search').'%')
+                                        ->orWhere('tor','like','%'.request('search').'%')
+                                        ->orWhere('kategori','like','%'.request('search').'%')
+                                        ->orWhere('lokasi','like','%'.request('search').'%');
+            
+            foreach($querytambahans as $querytambahan){
+                $querybantuan= (string)$querytambahan->kodeMaterial;
+                $fsn->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+            }
+        }
         return view('home',[
             "title" => "Dashboard",
-            "fsns" => $fsn,
+            "fsns" => $fsn->paginate(15),
             "kodematerials" => $kodematerials,
         ]);
     }
 
     public function stok()
     {
-        $kodematerials = kodeMaterial::paginate(15);
+        $kodematerials = kodeMaterial::query();
+        if(request('search')){
+            $kodematerials->where('kodeMaterial','like','%'.request('search').'%')
+                          ->orWhere('namaMaterial','like','%'.request('search').'%')
+                          ->orWhere('stok','like','%'.request('search').'%')
+                          ->orWhere('frekuensi','like','%'.request('search').'%')
+                          ->orWhere('peruntukan','like','%'.request('search').'%')
+                          ->orWhere('satuan','like','%'.request('search').'%');
+        }
         return view('stock',[
             "title" => "Stock",
-            "kodematerials" => $kodematerials,
+            "kodematerials" => $kodematerials->paginate(15),
         ]);
     }
 

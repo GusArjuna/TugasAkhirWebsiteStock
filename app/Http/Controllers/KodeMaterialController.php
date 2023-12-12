@@ -21,10 +21,15 @@ class KodeMaterialController extends Controller
      */
     public function index()
     {
-        $kodematerials = kodeMaterial::paginate(15);
+        $kodematerials = kodeMaterial::query();
+        if(request('search')){
+            $kodematerials->where('kodeMaterial','like','%'.request('search').'%')
+                          ->orWhere('namaMaterial','like','%'.request('search').'%')
+                          ->orWhere('satuan','like','%'.request('search').'%');
+        }
         return view('codestufff/codestuff',[
             "title" => "Kode Material",
-            "kodematerials" => $kodematerials
+            "kodematerials" => $kodematerials->paginate(15)
         ]);
     }
 

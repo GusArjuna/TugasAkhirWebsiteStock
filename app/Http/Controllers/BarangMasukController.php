@@ -29,10 +29,26 @@ class BarangMasukController extends Controller
     public function index()
     {
         $kodematerials = kodeMaterial::all();
-        $barangmasuks = barangMasuk::paginate(15);
+        $barangmasuks = barangMasuk::query();
+        if(request('search')){
+            $querytambahans=kodeMaterial::where('peruntukan','like','%'.request('search').'%')
+                                        ->orWhere('namaMaterial','like','%'.request('search').'%')
+                                        ->orWhere('satuan','like','%'.request('search').'%')->get();
+                                        
+            $barangmasuks->where('kodeMaterial','like','%'.request('search').'%')
+                                        ->orWhere('jumlah','like','%'.request('search').'%')
+                                        ->orWhere('kondisi','like','%'.request('search').'%')
+                                        ->orWhere('keterangan','like','%'.request('search').'%')
+                                        ->orWhere('tanggalMasuk','like','%'.request('search').'%');
+            
+            foreach($querytambahans as $querytambahan){
+                $querybantuan= (string)$querytambahan->kodeMaterial;
+                $barangmasuks->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+            }
+                                    }
         return view('stuffinf/stuffin',[
             "title" => "Barang Masuk",
-            "barangmasuks" => $barangmasuks,
+            "barangmasuks" => $barangmasuks->paginate(15),
             "kodematerials" => $kodematerials,
         ]);
     }
