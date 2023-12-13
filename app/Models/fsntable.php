@@ -12,6 +12,7 @@ class fsntable extends Model
         'kodeMaterial',
         'tor',
         'kategori',
+        'tahun',
         'lokasi'
     ];
 }

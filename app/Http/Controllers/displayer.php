@@ -36,8 +36,7 @@ class displayer extends Controller
             //    Nilai TOR dapat dihitung dengan rumus: TOR=JumlahHariSetahun/Waktu Simpan
 
 
-        // $year = $request->tahun; // Tahun yang diinginkan
-        $year = 2023;
+        $year = $request->tahun; // Tahun yang diinginkan
         $loping = 1;
         $totalHariSetahun = 0;
         fsntable::truncate();
@@ -242,6 +241,7 @@ class displayer extends Controller
                 'lokasi' => 'RAK ' . $loping,
                 'tor' => $TOR['Total'],
                 'kategori' =>  $kategori,
+                'tahun' =>  $year,
             ]);
 
             $loping++;
@@ -257,6 +257,7 @@ class displayer extends Controller
                 'lokasi' => 'RAK ' . $loping,
                 'tor' => $fsnn->tor,
                 'kategori' =>  $fsnn->kategori,
+                'tahun' =>  $fsnn->tahun,
             ]);
 
             $loping++;

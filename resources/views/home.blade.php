@@ -19,6 +19,26 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <form action="/updatefsn" method="post">
             @csrf
+            <div class="input-group mb-3">
+                <label class="input-group-text rounded-left" style="border-radius: 0" for="inputGroupSelect01">Tahun</label>
+                <select class="form-select" name="tahun">
+                    <option value="">Pilih Tahun</option>
+                    @php
+                        $start_year = date("Y") - 100; // Tahun mulai
+                        $end_year = date("Y") + 100; // Tahun akhir
+                        $tahun = $fsns->first()->tahun??'';
+                    @endphp
+                    @for ($i = $end_year; $i >= $start_year; $i--)
+                        @if ($i==$tahun)
+                            <option value={{ $i }} selected>{{ $i }}</option>
+                        @else
+                            <option value={{ $i }}>{{ $i }}</option>
+                        @endif
+                    @endfor
+                </select>
+              </div>
+            
+            
             <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-undo fa-sm text-white-50"></i> Update Rak</a>
             </button>

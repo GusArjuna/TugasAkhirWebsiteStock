@@ -17,6 +17,7 @@ return new class extends Migration
             $table->float('tor');
             $table->String('kategori');
             $table->String('lokasi');
+            $table->String('tahun');
             $table->timestamps();
         });
     }
