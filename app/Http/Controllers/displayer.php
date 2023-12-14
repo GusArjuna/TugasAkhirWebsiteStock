@@ -59,14 +59,9 @@ class displayer extends Controller
             $kategori='';
 
             //Inisialisasi Tahun
-            if($year>2023){
-                $stokPersediaanAwal =  persediaanAwal::where('kodeMaterial', $kodeMaterial)
-                ->whereYear('Tahun', $year-1)
+            $stokPersediaanAwal =  persediaanAwal::where('kodeMaterial', $kodeMaterial)
+                ->where('tahun', $year-1)
                 ->first(); // array untuk mencar data persediaan Awalsebelumnya
-            }else{
-                $stokPersediaanAwal =  persediaanAwal::where('kodeMaterial', $kodeMaterial)
-                ->first(); // array untuk mencar data persediaan Awalsebelumnya
-            }
 
             $updateDataBarangMasuk['Total']=0;
             $updateDataBarangKeluar['Total']=0;
@@ -186,10 +181,34 @@ class displayer extends Controller
             
 
             // Lakukan update atau create ke persediaan Awal dengan data yang telah disiapkan
-            PersediaanAwal::create(array_merge($persediaanAwal, [
-                'Tahun' => $year,
-                'kodeMaterial' => $kodeMaterial
-            ]));
+            if($stokPersediaanAwal==null){
+                PersediaanAwal::create([
+                    'Tahun' => $year-1,
+                    'January' => 0,
+                    'February' => 0,
+                    'March' => 0,
+                    'April' => 0,
+                    'May' => 0,
+                    'June' => 0,
+                    'July' => 0,
+                    'August' => 0,
+                    'September' => 0,
+                    'October' => 0,
+                    'November' => 0,
+                    'December' => 0,
+                    'kodeMaterial' => $kodeMaterial
+                ]);
+                PersediaanAwal::create(array_merge($persediaanAwal, [
+                    'Tahun' => $year,
+                    'kodeMaterial' => $kodeMaterial
+                ]));
+            }else{
+                PersediaanAwal::updateOrCreate(array_merge($persediaanAwal, [
+                    'Tahun' => $year,
+                    'kodeMaterial' => $kodeMaterial
+                ]));
+            }
+            
 
             // Lakukan update atau create ke Persediaan Masuk dengan data yang telah disiapkan
             PersediaanMasuk::updateOrCreate(
@@ -356,13 +375,21 @@ class displayer extends Controller
                 }
                 $pdf = Pdf::loadView('pdfstok', [
                     "kodematerials" => $data,
-                ]);
+                ])->setPaper('f4', 'landscape');
                 return $pdf->download('Laporan_Stok.pdf');
             }else{
-            $data = kodeMaterial::all();
-            $data = $data->toArray();
-            $pdf = Pdf::loadView('pdfstok', ["kodematerials" => $data,]);
-            return $pdf->download('Laporan_Rak.pdf');
+            $data = kodeMaterial::query();
+            if($request->search){
+                $data->where('kodeMaterial','like','%'.$request->search.'%')
+                          ->orWhere('namaMaterial','like','%'.$request->search.'%')
+                          ->orWhere('stok','like','%'.$request->search.'%')
+                          ->orWhere('frekuensi','like','%'.$request->search.'%')
+                          ->orWhere('peruntukan','like','%'.$request->search.'%')
+                          ->orWhere('satuan','like','%'.$request->search.'%');
+            }
+            $data = $data->get()->toArray();
+            $pdf = Pdf::loadView('pdfstok', ["kodematerials" => $data,])->setPaper('f4', 'landscape');
+            return $pdf->download('Laporan_Stok.pdf');
             }   
         }        
     }
@@ -373,6 +400,7 @@ class displayer extends Controller
             $cek=false;
             $lastId = fsntable::orderBy('id', 'desc')->first()->id; // Mendapatkan ID terakhir
             $data = [];
+            $kodematerials = kodeMaterial::all();
             for ($i = 1; $i <= $lastId; $i++) {
                 $inputName = 'print' . $i;
                 if($request->$inputName){
@@ -395,15 +423,29 @@ class displayer extends Controller
                         }
                     }
                 }
-                $pdf = Pdf::loadView('pdfdashboard', [
-                    "fsns" => $data,
-                ]);
+                $pdf = Pdf::loadView('pdfdashboard', ["fsns" => $data,"kodematerials" => $kodematerials])->setPaper('f4', 'landscape');
                 return $pdf->download('Laporan_Rak.pdf');
             }else{
-            $fsns = fsntable::all();
-            $fsns = $fsns->toArray();
-            $pdf = Pdf::loadView('pdfdashboard', ["fsns" => $fsns]);
-            return $pdf->download('Laporan_Rak.pdf');
+            $fsn = fsntable::query();
+            if($request->search){
+                $querytambahans=kodeMaterial::where('peruntukan','like','%'.$request->search.'%')
+                                            ->orWhere('namaMaterial','like','%'.$request->search.'%')
+                                            ->orWhere('satuan','like','%'.$request->search.'%')->get();
+                                            
+                $fsn->where('kodeMaterial','like','%'.$request->search.'%')
+                                            ->orWhere('tor','like','%'.$request->search.'%')
+                                            ->orWhere('kategori','like','%'.$request->search.'%')
+                                            ->orWhere('lokasi','like','%'.$request->search.'%');
+                
+                foreach($querytambahans as $querytambahan){
+                    $querybantuan= (string)$querytambahan->kodeMaterial;
+                    $fsn->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+                }
+            }
+            $kodematerials = $kodematerials->toArray();
+            $fsn = $fsn->get()->toArray();
+            $pdf = Pdf::loadView('pdfdashboard', ["fsns" => $fsn,"kodematerials" => $kodematerials])->setPaper('f4', 'landscape');
+            return $pdf->download('Laporan_Rak_FSN.pdf');
             }   
         }
     }

@@ -22,6 +22,8 @@
             <button type="submit" value="true" name="generate" class="btn btn-primary">
                 Generate Report
             </button>
+            
+            <input type="hidden" name="search" value="{{ request('search') }}">
     </div>
 
     <!-- DataTales Example -->

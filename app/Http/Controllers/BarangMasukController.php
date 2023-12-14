@@ -55,6 +55,7 @@ class BarangMasukController extends Controller
 
     public function printdelete(Request $request)
     {   
+        $kodematerials = kodeMaterial::all();
         if($request->delete){
             barangMasuk::destroy($request->delete);
             return redirect('/stuffin')->with('success','Data Dihapus');
@@ -84,21 +85,35 @@ class BarangMasukController extends Controller
                         }
                     }
                 }
-                $kodematerials = kodeMaterial::all();
                 $pdf = Pdf::loadView('stuffinf.pdf', [
                     "kodematerials" => $kodematerials,
                     "barangmasuks" => $data
-                ]);
+                ])->setPaper('f4', 'landscape');
                 return $pdf->download('Laporan_Barang_Masuk.pdf');
             }else{
-                $kodematerials = kodeMaterial::all();
+                $barangmasuks = barangMasuk::query();
+                if($request->search){
+                    $querytambahans=kodeMaterial::where('peruntukan','like','%'.request('search').'%')
+                    ->orWhere('namaMaterial','like','%'.request('search').'%')
+                    ->orWhere('satuan','like','%'.request('search').'%')->get();
+                    
+                $barangmasuks->where('kodeMaterial','like','%'.request('search').'%')
+                                    ->orWhere('jumlah','like','%'.request('search').'%')
+                                    ->orWhere('kondisi','like','%'.request('search').'%')
+                                    ->orWhere('keterangan','like','%'.request('search').'%')
+                                    ->orWhere('tanggalMasuk','like','%'.request('search').'%');
+
+                foreach($querytambahans as $querytambahan){
+                $querybantuan= (string)$querytambahan->kodeMaterial;
+                $barangmasuks->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+                }
+                }
                 $kodematerials = $kodematerials->toArray();
-                $barangmasuks = barangMasuk::all();
-                $barangmasuks = $barangmasuks->toArray();
+                $barangmasuks = $barangmasuks->get()->toArray();
                 $pdf = Pdf::loadView('stuffinf.pdf', [
                     "kodematerials" => $kodematerials,
                     "barangmasuks" => $barangmasuks
-                ]);
+                ])->setPaper('f4', 'landscape');
                 return $pdf->download('Laporan_Barang_Masuk.pdf');
             } 
             // ------------------------------

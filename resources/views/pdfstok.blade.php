@@ -11285,7 +11285,7 @@ body.sidebar-toggled footer.sticky-footer {
 
 </head>
 <body>
-   <div class="container mt-3">
+   <div class="mt-3">
             <center>
                 <h6 class="m-0 font-weight-bold text-primary">INVENTARIS PLN</h6>
                 <h6 class="m-0 font-weight-bold text-primary">LAPORAN STOK MATERIAL</h6>
@@ -11309,17 +11309,6 @@ body.sidebar-toggled footer.sticky-footer {
                             <th>Peruntukan</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Kode Katalog</th>
-                            <th>Nama Material</th>
-                            <th>Stok</th>
-                            <th>Satuan</th>
-                            <th>Frekuensi Penggunaan</th>
-                            <th>Peruntukan</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($kodematerials as $kodematerial)
                         <tr>
@@ -11333,6 +11322,17 @@ body.sidebar-toggled footer.sticky-footer {
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                      <tr>
+                          <th>No</th>
+                          <th>Kode Katalog</th>
+                          <th>Nama Material</th>
+                          <th>Stok</th>
+                          <th>Satuan</th>
+                          <th>Frekuensi Penggunaan</th>
+                          <th>Peruntukan</th>
+                      </tr>
+                  </tfoot>
                    </table>
                </div>
            </div>

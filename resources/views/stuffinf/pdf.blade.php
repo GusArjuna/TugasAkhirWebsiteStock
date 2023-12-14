@@ -11285,7 +11285,7 @@ body.sidebar-toggled footer.sticky-footer {
 
 </head>
 <body>
-   <div class="container mt-3">
+   <div class="mt-3">
             <center>
                 <h6 class="m-0 font-weight-bold text-primary">INVENTARIS PLN</h6>
                 <h6 class="m-0 font-weight-bold text-primary">LAPORAN BARANG MASUK</h6>
@@ -11311,7 +11311,49 @@ body.sidebar-toggled footer.sticky-footer {
                           <th>Tanggal Masuk</th>
                       </tr>
                       </thead>
-                      <tfoot>
+                       <tbody>
+                        @foreach ($barangmasuks as $barangmasuk)
+                        <tr>
+                          
+                            <td>{{ $loop->iteration }}</td>
+                            <td>
+                              @foreach ($kodematerials as $kodematerial)
+                                  @if ($kodematerial['kodeMaterial'] == $barangmasuk['kodeMaterial'])
+                                      {{ $kodematerial['kodeMaterial'] }}
+                                      @break
+                                  @endif
+                              @endforeach
+                          </td>
+                          <td>
+                              @foreach ($kodematerials as $kodematerial)
+                                  @if ($kodematerial['kodeMaterial'] == $barangmasuk['kodeMaterial'])
+                                      {{ $kodematerial['namaMaterial'] }}
+                                      @break
+                                  @endif
+                              @endforeach
+                          </td>
+                          <td>{{ $barangmasuk['jumlah'] }}</td>
+                          <td>
+                              @foreach ($kodematerials as $kodematerial)
+                                  @if ($kodematerial['kodeMaterial'] == $barangmasuk['kodeMaterial'])
+                                      {{ $kodematerial['satuan'] }}
+                                      @break
+                                  @endif
+                              @endforeach
+                          </td>
+                          <td>{{ $barangmasuk['kondisi'] }}</td>
+                          <td>@foreach ($kodematerials as $kodematerial)
+                              @if ($kodematerial['kodeMaterial'] == $barangmasuk['kodeMaterial'])
+                                  {{ $kodematerial['peruntukan'] }}
+                                  @break
+                              @endif
+                          @endforeach</td>
+                          <td>{{ $barangmasuk['keterangan'] }}</td>
+                          <td>{{ $barangmasuk['tanggalMasuk'] }}</td>
+                        </tr>
+                        @endforeach
+                       </tbody>
+                       <tfoot>
                         <tr>
                           <th>No</th>
                           <th>Kode Katalog</th>
@@ -11322,43 +11364,8 @@ body.sidebar-toggled footer.sticky-footer {
                           <th>Peruntukan</th>
                           <th>Keterangan</th>
                           <th>Tanggal Masuk</th>
-                      </tr>
-                      </tfoot>
-                       <tbody>
-                        @foreach ($barangmasuks as $barangmasuk)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial['kodeMaterial']==$barangmasuk['kodeMaterial'])? $kodematerial['kodeMaterial'] :""
-                                }}
-                                @endforeach
-                            </td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial['kodeMaterial']==$barangmasuk['kodeMaterial'])? $kodematerial['namaMaterial'] :""
-                                }}
-                                @endforeach
-                            </td>
-                            <td>{{ $barangmasuk['jumlah'] }}</td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                                {{ 
-                                    ($kodematerial['kodeMaterial']==$barangmasuk['kodeMaterial'])? $kodematerial['satuan'] :""
-                                }}
-                                @endforeach
-                            </td>
-                            <td>{{ $barangmasuk['kondisi'] }}</td>
-                            <td>@foreach ($kodematerials as $kodematerial)
-                              {{ 
-                                  ($kodematerial['kodeMaterial']==$barangmasuk['kodeMaterial'])? $kodematerial['peruntukan'] :""
-                              }}
-                              @endforeach
-                            </td>
-                            <td>{{ $barangmasuk['keterangan'] }}</td>
-                            <td>{{ $barangmasuk['tanggalMasuk'] }}</td>
                         </tr>
-                        @endforeach
-                       </tbody>
+                        </tfoot>
                    </table>
                </div>
            </div>

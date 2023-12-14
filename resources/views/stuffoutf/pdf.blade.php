@@ -11280,12 +11280,20 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+#dataTable {
+  font-size: 11.5px; /* Mengatur ukuran font untuk tabel dengan ID "dataTable" */
+}
+
+#dataTable th,
+#dataTable td {
+  font-size: 11.5px; /* Mengatur ukuran font untuk sel header (th) dan sel data (td) */
+}
     </style>
     
 
 </head>
 <body>
-   <div class="container mt-3">
+   <div class="mt-3">
             <center>
                 <h6 class="m-0 font-weight-bold text-primary">INVENTARIS PLN</h6>
                 <h6 class="m-0 font-weight-bold text-primary">LAPORAN BARANG KELUAR</h6>
@@ -11314,60 +11322,63 @@ body.sidebar-toggled footer.sticky-footer {
                           <th>Tanggal Keluar</th>
                       </tr>
                   </thead>
-                  <tfoot>
-                      <tr>
-                          <th>No</th>
-                          <th>Kode Katalog</th>
-                          <th>Nama Material</th>
-                          <th>Jumlah</th>
-                          <th>Satuan</th>
-                          <th>Kondisi</th>
-                          <th>Peruntukan</th>
-                          <th>Keperluan</th>
-                          <th>Keterangan</th>
-                          <th>Nama Peminjam</th>
-                          <th>Divisi</th>
-                          <th>Tanggal Keluar</th>
-                      </tr>
-                  </tfoot>
                   <tbody>
                       @foreach ($barangkeluars as $barangkeluar)
                       <tr>
                           <td>{{ $loop->iteration }}</td>
                           <td>@foreach ($kodematerials as $kodematerial)
-                              {{ 
-                                  ($kodematerial['kodeMaterial']==$barangkeluar['kodeMaterial'])? $kodematerial['kodeMaterial'] :""
-                              }}
-                              @endforeach
-                          </td>
-                          <td>@foreach ($kodematerials as $kodematerial)
-                              {{ 
-                                  ($kodematerial['kodeMaterial']==$barangkeluar['kodeMaterial'])? $kodematerial['namaMaterial'] :""
-                              }}
-                              @endforeach
-                          </td>
-                          <td>{{ $barangkeluar['jumlah'] }}</td>
-                          <td>@foreach ($kodematerials as $kodematerial)
-                              {{ 
-                                  ($kodematerial['kodeMaterial']==$barangkeluar['kodeMaterial'])? $kodematerial['satuan'] :""
-                              }}
-                              @endforeach
-                          </td>
-                          <td>{{ $barangkeluar['kondisi'] }}</td>
-                          <td>@foreach ($kodematerials as $kodematerial)
-                            {{ 
-                                ($kodematerial['kodeMaterial']==$barangkeluar['kodeMaterial'])? $kodematerial['peruntukan'] :""
-                            }}
-                            @endforeach
-                          </td>
-                          <td>{{ $barangkeluar['keperluan'] }}</td>
-                          <td>{{ $barangkeluar['keterangan'] }}</td>
-                          <td>{{ $barangkeluar['peminjam'] }}</td>
-                          <td>{{ $barangkeluar['divisi'] }}</td>
-                          <td>{{ $barangkeluar['tanggalKeluar'] }}</td>
+                            @if ($kodematerial['kodeMaterial'] == $barangkeluar['kodeMaterial'])
+                                {{ $kodematerial['kodeMaterial'] }}
+                                @break
+                            @endif
+                        @endforeach
+                        </td>
+                        <td>@foreach ($kodematerials as $kodematerial)
+                            @if ($kodematerial['kodeMaterial'] == $barangkeluar['kodeMaterial'])
+                                {{ $kodematerial['namaMaterial'] }}
+                                @break
+                            @endif
+                        @endforeach
+                        </td>
+                        <td>{{ $barangkeluar['jumlah'] }}</td>
+                        <td>@foreach ($kodematerials as $kodematerial)
+                            @if ($kodematerial['kodeMaterial'] == $barangkeluar['kodeMaterial'])
+                                {{ $kodematerial['satuan'] }}
+                                @break
+                            @endif
+                        @endforeach
+                        </td>
+                        <td>{{ $barangkeluar['kondisi'] }}</td>
+                        <td>@foreach ($kodematerials as $kodematerial)
+                            @if ($kodematerial['kodeMaterial'] == $barangkeluar['kodeMaterial'])
+                                {{ $kodematerial['peruntukan'] }}
+                                @break
+                            @endif
+                        @endforeach</td>
+                        <td>{{ $barangkeluar['keperluan'] }}</td>
+                        <td>{{ $barangkeluar['keterangan'] }}</td>
+                        <td>{{ $barangkeluar['peminjam'] }}</td>
+                        <td>{{ $barangkeluar['divisi'] }}</td>
+                        <td>{{ $barangkeluar['tanggalKeluar'] }}</td>
                       </tr>
                       @endforeach
                   </tbody>
+                  <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Katalog</th>
+                        <th>Nama Material</th>
+                        <th>Jumlah</th>
+                        <th>Satuan</th>
+                        <th>Kondisi</th>
+                        <th>Peruntukan</th>
+                        <th>Keperluan</th>
+                        <th>Keterangan</th>
+                        <th>Nama Peminjam</th>
+                        <th>Divisi</th>
+                        <th>Tanggal Keluar</th>
+                    </tr>
+                    </tfoot>  
                    </table>
                </div>
            </div>

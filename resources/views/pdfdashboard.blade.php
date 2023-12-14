@@ -11285,7 +11285,7 @@ body.sidebar-toggled footer.sticky-footer {
 
 </head>
 <body>
-   <div class="container mt-3">
+   <div class="mt-3">
             <center>
                 <h6 class="m-0 font-weight-bold text-primary">INVENTARIS PLN</h6>
                 <h6 class="m-0 font-weight-bold text-primary">LAPORAN DAFTAR RAK MATERIAL</h6>
@@ -11306,30 +11306,58 @@ body.sidebar-toggled footer.sticky-footer {
                             <th>Lokasi Gudang</th>
                             <th>Satuan</th>
                             <th>Peruntukan</th>
+                            <th>Nilai TOR</th>
+                            <th>Kategori</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Kode Katalog</th>
-                            <th>Nama Material</th>
-                            <th>Lokasi Gudang</th>
-                            <th>Satuan</th>
-                            <th>Peruntukan</th>
-                        </tr>
-                    </tfoot>
                     <tbody>
                         @foreach ($fsns as $fsn)
                         <tr>
                           <td> {{ $loop->iteration }} </td>
-                          <td> {{ $fsn['kodeMaterial']}} </td>
-                          <td> {{ $fsn['namaMaterial']}} </td>
-                          <td> {{ $fsn['lokasi']}} </td>
-                          <td> {{ $fsn['satuan']}} </td>
-                          <td> {{ $fsn['peruntukan']}} </td>
+                            <td> 
+                                @foreach ($kodematerials as $kodematerial)
+                                    @if ($kodematerial['kodeMaterial'] == $fsn['kodeMaterial'])
+                                        {{ $kodematerial['kodeMaterial'] }}
+                                        @break
+                                    @endif
+                                @endforeach
+                             </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial['kodeMaterial'] == $fsn['kodeMaterial'])
+                                    {{ $kodematerial['namaMaterial'] }}
+                                    @break
+                                @endif
+                            @endforeach </td>
+                            <td> {{ $fsn['lokasi']}} </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial['kodeMaterial'] == $fsn['kodeMaterial'])
+                                    {{ $kodematerial['satuan'] }}
+                                    @break
+                                @endif
+                            @endforeach </td>
+                            <td> @foreach ($kodematerials as $kodematerial)
+                                @if ($kodematerial['kodeMaterial'] == $fsn['kodeMaterial'])
+                                    {{ $kodematerial['peruntukan'] }}
+                                    @break
+                                @endif
+                            @endforeach </td>
+                            <td> {{ $fsn['tor']}} </td>
+                            <td> {{ $fsn['kategori']}} </td>
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Kode Katalog</th>
+                        <th>Nama Material</th>
+                        <th>Lokasi Gudang</th>
+                        <th>Satuan</th>
+                        <th>Peruntukan</th>
+                        <th>Nilai TOR</th>
+                        <th>Kategori</th>
+                      </tr>
+                  </tfoot>
                    </table>
                </div>
            </div>

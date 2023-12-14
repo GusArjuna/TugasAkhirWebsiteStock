@@ -60,6 +60,7 @@ class BarangKeluarController extends Controller
 
     public function printdelete(Request $request)
     {   
+        $kodematerials = kodeMaterial::all();
         if($request->delete){
             barangKeluar::destroy($request->delete);
             return redirect('/stuffout')->with('success','Data Dihapus');
@@ -89,22 +90,40 @@ class BarangKeluarController extends Controller
                         }
                     }
                 }
-                $kodematerials = kodeMaterial::all();
                 $pdf = Pdf::loadView('stuffoutf.pdf', [
                     "kodematerials" => $kodematerials,
                     "barangkeluars" => $data
-                ]);
+                ])->setPaper('f4', 'landscape');
                 return $pdf->download('Laporan_Barang_Keluar.pdf');
             }else{
-                $kodematerials = kodeMaterial::all();
+                $barangkeluars = barangKeluar::query();
+                if($request->search){
+                    $querytambahans=kodeMaterial::where('peruntukan','like','%'.request('search').'%')
+                                        ->orWhere('namaMaterial','like','%'.request('search').'%')
+                                        ->orWhere('satuan','like','%'.request('search').'%')->get();
+                                        
+                    $barangkeluars->where('kodeMaterial','like','%'.request('search').'%')
+                                                ->orWhere('jumlah','like','%'.request('search').'%')
+                                                ->orWhere('kondisi','like','%'.request('search').'%')
+                                                ->orWhere('keterangan','like','%'.request('search').'%')
+                                                ->orWhere('keperluan','like','%'.request('search').'%')
+                                                ->orWhere('keterangan','like','%'.request('search').'%')
+                                                ->orWhere('peminjam','like','%'.request('search').'%')
+                                                ->orWhere('divisi','like','%'.request('search').'%')
+                                                ->orWhere('tanggalKeluar','like','%'.request('search').'%');
+                    
+                    foreach($querytambahans as $querytambahan){
+                        $querybantuan= (string)$querytambahan->kodeMaterial;
+                        $barangkeluars->orWhere('kodeMaterial','like','%'.$querybantuan.'%');
+                    }
+                }
                 $kodematerials = $kodematerials->toArray();
-                $barangkeluars = barangKeluar::all();
-                $barangkeluars = $barangkeluars->toArray();
+                $barangkeluars = $barangkeluars->get()->toArray();
                 $pdf = Pdf::loadView('stuffoutf.pdf', [
                     "kodematerials" => $kodematerials,
                     "barangkeluars" => $barangkeluars
-                ]);
-                return $pdf->download('Laporan_Barang_Masuk.pdf');
+                ])->setPaper('f4', 'landscape');
+                return $pdf->download('Laporan_Barang_Keluar.pdf');
             } 
         }
         

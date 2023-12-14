@@ -76,12 +76,17 @@ class KodeMaterialController extends Controller
                         }
                     }
                 }
-                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data])->setPaper('f4', 'landscape');
                 return $pdf->download('Kode_Material.pdf');
             }else{
-                $collection = kodeMaterial::all();
-                $data = $collection->toArray();
-                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data]);
+                $data = kodeMaterial::query();
+                if($request->search){
+                    $data->where('kodeMaterial','like','%'.request('search').'%')
+                          ->orWhere('namaMaterial','like','%'.request('search').'%')
+                          ->orWhere('satuan','like','%'.request('search').'%');
+                }
+                $data = $data->get()->toArray();
+                $pdf = Pdf::loadView('codestufff.pdf', ["data" => $data])->setPaper('f4', 'landscape');
                 return $pdf->download('Kode_Material.pdf');
             }
         }
